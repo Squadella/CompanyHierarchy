@@ -1,27 +1,46 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Company
 {
     private Employee CEO;
     private float totalCost;
+    private float averageDepartmentCost;
     private int numberOfEmployee;
-    private String mostExpensiveDepartement;
-    private String lessExpensiveDepartement;
-    private float averageDepartementCost;
+    private String mostExpensiveDepartment;
+    private String lessExpensiveDepartment;
+
+    public Company()
+    {
+        //Default initialisations
+        totalCost=0;
+        averageDepartmentCost=0;
+        numberOfEmployee=0;
+        mostExpensiveDepartment=null;
+        lessExpensiveDepartment=null;
+    }
 
     public void moveEmployee()
     {
 
     }
 
-    public void addEmployee()
+    public void addEmployee(Employee supervisor)
     {
+        //TODO: find a way to be place at the superior level
 
     }
 
-    public List<Employee> getAllEmployee()
+    public void getAllEmployee(Employee currentEmployee, List<Employee> allEmployees)
     {
-        return null;
+        if(currentEmployee.getSubEmployee()!=null)
+        {
+            for (int i = 0; i < currentEmployee.getSubEmployee().size(); ++i)
+            {
+                allEmployees.add(currentEmployee.getSubEmployee().get(i));
+                getAllEmployee(currentEmployee.getSubEmployee().get(i), allEmployees);
+            }
+        }
     }
 
     public Employee getEmployeeByID(int id)
@@ -39,18 +58,18 @@ public class Company
         return numberOfEmployee;
     }
 
-    public String getMostExpensiveDepartement()
+    public String getMostExpensiveDepartment()
     {
-        return mostExpensiveDepartement;
+        return mostExpensiveDepartment;
     }
 
-    public String getLessExpensiveDepartement()
+    public String getLessExpensiveDepartment()
     {
-        return lessExpensiveDepartement;
+        return lessExpensiveDepartment;
     }
 
-    public float getAverageDepartementCost()
+    public float getAverageDepartmentCost()
     {
-        return averageDepartementCost;
+        return averageDepartmentCost;
     }
 }
