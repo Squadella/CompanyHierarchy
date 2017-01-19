@@ -41,7 +41,7 @@
             </Pane>
             <Pane layoutX="148.0" prefHeight="485.0" prefWidth="357.0">
                <children>
-                  <ListView layoutX="7.0" layoutY="35.0" prefHeight="435.0" prefWidth="348.0" />
+                  <ListView fx:id="listViewEmployee" layoutX="7.0" layoutY="35.0" prefHeight="435.0" prefWidth="348.0" />
                   <Text layoutX="13.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees list :" wrappingWidth="325.0" />
                </children>
             </Pane>

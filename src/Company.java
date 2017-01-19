@@ -1,6 +1,5 @@
 import javafx.application.Platform;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Company
@@ -15,11 +14,11 @@ public class Company
     public Company()
     {
         //Default initialisations
-        totalCost=0;
-        averageDepartmentCost=0;
-        numberOfEmployee=0;
-        mostExpensiveDepartment=null;
-        lessExpensiveDepartment=null;
+        totalCost = 0;
+        averageDepartmentCost = 0;
+        numberOfEmployee = 0;
+        mostExpensiveDepartment = null;
+        lessExpensiveDepartment = null;
     }
 
     public void moveEmployee()
@@ -30,14 +29,13 @@ public class Company
     public void addEmployee(Employee supervisor)
     {
         //TODO: find a way to be place at the superior level
-
     }
 
     public float getDptExpenses(String dpt)
     {
         float totalExpense = 0;
 
-        switch (dpt)
+        switch(dpt)
         {
             case "Accounting" :
                 break;
@@ -58,7 +56,7 @@ public class Company
     {
         int totalEmployees = 0;
 
-        switch (dpt)
+        switch(dpt)
         {
             case "Accounting" :
                 break;
@@ -79,7 +77,7 @@ public class Company
     {
         if(currentEmployee.getSubEmployee()!=null)
         {
-            for (int i = 0; i < currentEmployee.getSubEmployee().size(); ++i)
+            for(int i = 0; i < currentEmployee.getSubEmployee().size(); ++i)
             {
                 allEmployees.add(currentEmployee.getSubEmployee().get(i));
                 getAllEmployee(currentEmployee.getSubEmployee().get(i), allEmployees);

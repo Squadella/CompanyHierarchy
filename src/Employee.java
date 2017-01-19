@@ -13,24 +13,24 @@ public class Employee
 
     public Employee(String position, String firstName, String sirName, String department, float salary)
     {
-        this.position=position;
-        this.firstName=firstName;
-        this.sirName=sirName;
-        this.department=department;
-        this.salary=salary;
-        this.supervisor =null;
-        this.subordinates=null;
+        this.position = position;
+        this.firstName = firstName;
+        this.sirName = sirName;
+        this.department = department;
+        this.salary = salary;
+        this.supervisor = null;
+        this.subordinates = null;
     }
 
     public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
     {
-        this.position=position;
-        this.firstName=firstName;
-        this.sirName=sirName;
-        this.department=department;
-        this.salary=salary;
+        this.position = position;
+        this.firstName = firstName;
+        this.sirName = sirName;
+        this.department = department;
+        this.salary = salary;
         this.supervisor = supervisor;
-        this.subordinates=null;
+        this.subordinates = null;
     }
 
     public float getSalary()
@@ -56,7 +56,7 @@ public class Employee
     public void removeEmployee()
     {
         //TODO : implement remove action.
-        for(int i=0; i<this.subordinates.size(); ++i)
+        for(int i = 0; i < this.subordinates.size(); ++i)
         {
             this.supervisor.addSubordinate(this.subordinates.get(i));
             this.subordinates.get(i).setNewSupervisor(this.supervisor);
@@ -86,9 +86,9 @@ public class Employee
             System.out.println("ERROR, the employee doesn't not have any subordinate.");
             return;
         }
-        for(int i=0; i<subordinates.size(); ++i)
+        for(int i = 0; i < subordinates.size(); ++i)
         {
-            if(subordinate==subordinates.get(i))
+            if(subordinate == subordinates.get(i))
             {
                 subordinates.remove(i);
                 return;
@@ -99,6 +99,6 @@ public class Employee
 
     public void setNewSupervisor(Employee newSupervisor)
     {
-        this.supervisor =newSupervisor;
+        this.supervisor = newSupervisor;
     }
 }

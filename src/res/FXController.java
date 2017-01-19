@@ -1,12 +1,19 @@
 package res;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.text.Text;
 
+import java.util.List;
+
 public class FXController {
+
+    @FXML private ListView<String> listViewEmployee;
+
     @FXML private Text textTotalHRExpenses;
     @FXML private Text textTotalEmployee;
     @FXML private Text textMostExpDpt;
@@ -34,6 +41,11 @@ public class FXController {
     @FXML private Text textEmployeeSubordonate;
 
     @FXML private Menu menuQuit;
+
+    public void fillListView(List<String> employeeList)
+    {
+        listViewEmployee.setItems(FXCollections.observableArrayList(employeeList));
+    }
 
     public void setTextTotalHRExpenses(String text) { textTotalHRExpenses.setText(text); }
     public void setTextTotalEmployee(String text) { textTotalEmployee.setText(text); }

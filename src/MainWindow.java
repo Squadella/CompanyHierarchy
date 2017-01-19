@@ -1,10 +1,12 @@
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import res.FXController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainWindow extends Application
 {
@@ -34,13 +36,14 @@ public class MainWindow extends Application
         _stage.setResizable(false);
         _stage.show();
 
-        load();
+        loadUI();
     }
 
-    private void load()
+    private void loadUI()
     {
         //Charger société en attributs locaux
         //Charger les employees
+        loadListView(/* Pass employee list here */);
         refreshUI();
     }
 
@@ -66,5 +69,17 @@ public class MainWindow extends Application
         _controller.setTextManuEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Manufacturing")));
 
         //Actualiser l'affichage pour employee
+    }
+
+    //Load `listViewEmployee` w/ magic
+    private void loadListView(/* Pass employee list */)
+    {
+        List<String> tmp = new ArrayList<>();
+
+        tmp.add("1");
+        tmp.add("2");
+        tmp.add("3");
+
+        _controller.fillListView(tmp);
     }
 }
