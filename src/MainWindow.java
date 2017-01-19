@@ -30,11 +30,10 @@ public class MainWindow extends Application
         _company = new Company();
 
         //Stage manipulation
-        Stage _stage = stage;
-        _stage.setTitle("Company Hierarchy Manager");
-        _stage.setScene(scene);
-        _stage.setResizable(false);
-        _stage.show();
+        stage.setTitle("Company Hierarchy Manager");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
 
         loadUI();
     }
