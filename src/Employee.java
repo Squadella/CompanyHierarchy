@@ -12,6 +12,18 @@ public class Employee
     private List<Employee> subordinates;
     private Employee supervisor; // For the first element, supervisor = null
 
+    public Employee(String position, String firstName, String sirName, String department, float salary, int id)
+    {
+        this.position=position;
+        this.firstName=firstName;
+        this.sirName=sirName;
+        this.department=department;
+        this.salary=salary;
+        this.supervisor=null;
+        this.subordinates= new ArrayList<>();
+        this.id=id;
+    }
+
     public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
     {
         this.position=position;
@@ -19,8 +31,8 @@ public class Employee
         this.sirName=sirName;
         this.department=department;
         this.salary=salary;
-        this.supervisor = supervisor;
-        this.subordinates=null;
+        this.supervisor=supervisor;
+        this.subordinates=new ArrayList<>();
         this.id=id;
     }
 
@@ -69,7 +81,8 @@ public class Employee
 
     public void addSubordinate(Employee subordinate)
     {
-        subordinates.add(subordinate);
+        this.subordinates.add(subordinate);
+        subordinate.supervisor=this;
     }
 
     public void addSubordinate(List<Employee> subordinates)
