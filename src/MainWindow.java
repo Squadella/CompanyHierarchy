@@ -8,9 +8,8 @@ import res.FXController;
 
 public class MainWindow extends Application
 {
-    //Attributes
-    private Stage _stage;
     private FXController _controller;
+    private Company _company;
 
     public static void main(String[] args)
     {
@@ -26,12 +25,46 @@ public class MainWindow extends Application
         Parent root = loader.load();
         Scene scene = new Scene(root, 1100, 515);
         _controller = loader.getController();
+        _company = new Company();
 
         //Stage manipulation
-        _stage = stage;
+        Stage _stage = stage;
         _stage.setTitle("Company Hierarchy Manager");
         _stage.setScene(scene);
         _stage.setResizable(false);
         _stage.show();
+
+        load();
+    }
+
+    private void load()
+    {
+        //Charger société en attributs locaux
+        //Charger les employees
+        refreshUI();
+    }
+
+    //Refresh everything in UI except Employee frame
+    private void refreshUI()
+    {
+        _controller.setTextTotalHRExpenses("Total HR expenses : " + _company.getTotalCost() + " $");
+        _controller.setTextTotalEmployee("Number of employees : " + _company.getEmployeeNumber());
+        _controller.setTextMostExpDpt("Most expensive departement : " + _company.getMostExpensiveDepartment());
+        _controller.setTextLessExpDpt("Less expensive departement : " + _company.getLessExpensiveDepartment());
+        _controller.setTextAverageDptExp("Average departement expenses : " + _company.getAverageDepartmentCost() + " $");
+
+        _controller.setTextAccExpenses("Total expenses : " + Float.toString(_company.getDptExpenses("Accounting")) + " $");
+        _controller.setTextAccEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Accounting")));
+
+        _controller.setTextSalesExpenses("Total expenses : " + Float.toString(_company.getDptExpenses("Sales")) + " $");
+        _controller.setTextSalesEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Sales")));
+
+        _controller.setTextMarkExpenses("Total expenses : " + Float.toString(_company.getDptExpenses("Marketing")) + " $");
+        _controller.setTextMarkEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Marketing")));
+
+        _controller.setTextManuExpenses("Total expenses : " + Float.toString(_company.getDptExpenses("Manufacturing")) + " $");
+        _controller.setTextManuEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Manufacturing")));
+
+        //Actualiser l'affichage pour employee
     }
 }

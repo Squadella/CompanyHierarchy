@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,48 @@ public class Company
     {
         //TODO: find a way to be place at the superior level
 
+    }
+
+    public float getDptExpenses(String dpt)
+    {
+        float totalExpense = 0;
+
+        switch (dpt)
+        {
+            case "Accounting" :
+                break;
+            case "Sales" :
+                break;
+            case "Marketing" :
+                break;
+            case "Manufacturing" :
+                break;
+            default :
+                Platform.exit();
+        }
+
+        return totalExpense;
+    }
+
+    public int getDptEmployee(String dpt)
+    {
+        int totalEmployees = 0;
+
+        switch (dpt)
+        {
+            case "Accounting" :
+                break;
+            case "Sales" :
+                break;
+            case "Marketing" :
+                break;
+            case "Manufacturing" :
+                break;
+            default :
+                Platform.exit();
+        }
+
+        return totalEmployees;
     }
 
     public void getAllEmployee(Employee currentEmployee, List<Employee> allEmployees)
@@ -71,5 +115,10 @@ public class Company
     public float getAverageDepartmentCost()
     {
         return averageDepartmentCost;
+    }
+
+    public Employee getCEO()
+    {
+        return CEO;
     }
 }
