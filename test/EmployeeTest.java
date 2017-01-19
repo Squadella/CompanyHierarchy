@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -8,14 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class EmployeeTest {
     Employee test;
+    Employee subEmployee;
+
     @BeforeEach
     public void initialize()
     {
-        this.test = new Employee("CEO", "FirstNameTest", "SirNameTest","Marketing",0);
+        test = new Employee("CEO", "FirstNameTest", "SirNameTest","Marketing",10,null,0);
+        subEmployee = new Employee("Head", "2FirstNameTest", "2SirNameTest","Sales",20,1);
+        test.addSubordinate(subEmployee);
     }
     @Test
     void getSalary() {
-        assertEquals(0, test.getSalary());
+        assertEquals(10, test.getSalary());
     }
 
     @Test
@@ -31,18 +38,22 @@ class EmployeeTest {
 
     @Test
     void getSubEmployee() {
-        
+        List<Employee> list=new ArrayList<>();
+        list.add(subEmployee);
+        assertEquals(list, test.getSubEmployee());
     }
 
     @Test
     void removeEmployee() {
-
+        List<Employee> list=new ArrayList<>();
+        test.getSubEmployee().get(0).removeEmployee();
+        assertEquals(list, test.getSubEmployee());
     }
 
     @Test
-    void getSirName() {
+    void getSirName()
+    {
         assertEquals("SirNameTest", test.getSirName());
-
     }
 
     @Test
@@ -52,17 +63,6 @@ class EmployeeTest {
 
     @Test
     void addSubordinate() {
-
+        assertEquals(subEmployee, test.getSubEmployee().get(0));
     }
-
-    @Test
-    void removeSubordinate() {
-
-    }
-
-    @Test
-    void setNewSupervisor() {
-
-    }
-
 }
