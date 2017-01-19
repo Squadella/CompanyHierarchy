@@ -11,18 +11,7 @@ public class Employee
     private List<Employee> subordinates;
     private Employee supervisor; // For the first element, supervisor = null
 
-    public Employee(String position, String firstName, String sirName, String department, float salary)
-    {
-        this.position=position;
-        this.firstName=firstName;
-        this.sirName=sirName;
-        this.department=department;
-        this.salary=salary;
-        this.supervisor =null;
-        this.subordinates=null;
-    }
-
-    public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
+    public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
     {
         this.position=position;
         this.firstName=firstName;
@@ -31,6 +20,7 @@ public class Employee
         this.salary=salary;
         this.supervisor = supervisor;
         this.subordinates=null;
+        this.id=id;
     }
 
     public float getSalary()
@@ -61,7 +51,7 @@ public class Employee
             this.supervisor.addSubordinate(this.subordinates.get(i));
             this.subordinates.get(i).setNewSupervisor(this.supervisor);
         }
-        //Destroy the element?
+        this.supervisor.removeSubordinate(this);
     }
 
     public String getSirName()
@@ -99,6 +89,25 @@ public class Employee
 
     public void setNewSupervisor(Employee newSupervisor)
     {
-        this.supervisor =newSupervisor;
+        this.supervisor=newSupervisor;
+    }
+
+    public Employee getEmployeeByID(int id, Employee current)
+    {
+        if(this.id == id)
+            return this;
+
+        if(current.getSubEmployee()==null)
+            return null;
+
+        for(int i=0; i<current.getSubEmployee().size(); ++i)
+            getEmployeeByID(id, current.getSubEmployee().get(i));
+
+        return null;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 }
