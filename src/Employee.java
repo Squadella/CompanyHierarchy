@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee
@@ -10,19 +11,22 @@ public class Employee
     private String sirName;
     private List<Employee> subordinates;
     private Employee supervisor; // For the first element, supervisor = null
+    private int depth;
 
-    public Employee(String position, String firstName, String sirName, String department, float salary)
+    public Employee(String position, String firstName, String sirName, String department, float salary, int id)
     {
+        this.id = id;
+        this.salary = salary;
+        this.department = department;
         this.position = position;
         this.firstName = firstName;
         this.sirName = sirName;
-        this.department = department;
-        this.salary = salary;
+        this.subordinates = new ArrayList<>();
         this.supervisor = null;
-        this.subordinates = null;
+        this.depth = 0;
     }
 
-    public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
+    public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
     {
         this.position = position;
         this.firstName = firstName;
@@ -30,7 +34,9 @@ public class Employee
         this.department = department;
         this.salary = salary;
         this.supervisor = supervisor;
-        this.subordinates = null;
+        this.subordinates = new ArrayList<>();
+        this.id = id;
+        this.depth = supervisor.getDepth()+1;
     }
 
     public float getSalary()
@@ -56,12 +62,14 @@ public class Employee
     public void removeEmployee()
     {
         //TODO : implement remove action.
+        //Moving subordinates to the top level
+        this.supervisor.addSubordinate(this.subordinates);
+
         for(int i = 0; i < this.subordinates.size(); ++i)
-        {
-            this.supervisor.addSubordinate(this.subordinates.get(i));
             this.subordinates.get(i).setNewSupervisor(this.supervisor);
-        }
-        //Destroy the element?
+
+        this.removeAllSubordinate();
+        this.supervisor.removeSubordinate(this);
     }
 
     public String getSirName()
@@ -76,7 +84,18 @@ public class Employee
 
     public void addSubordinate(Employee subordinate)
     {
-        subordinates.add(subordinate);
+        this.subordinates.add(subordinate);
+        subordinate.supervisor = this;
+    }
+
+    public void addSubordinate(List<Employee> subordinates)
+    {
+        this.subordinates.addAll(subordinates);
+    }
+
+    public void removeAllSubordinate()
+    {
+        this.subordinates=new ArrayList<>();
     }
 
     public void removeSubordinate(Employee subordinate)
@@ -100,5 +119,35 @@ public class Employee
     public void setNewSupervisor(Employee newSupervisor)
     {
         this.supervisor = newSupervisor;
+        this.depth = this.supervisor.getDepth()+1;
+    }
+
+    public Employee getSupervisor()
+    {
+        return supervisor;
+    }
+
+    public Employee getEmployeeByID(int id, Employee current)
+    {
+        if(this.id == id)
+            return this;
+
+        if(current.getSubEmployee() == null)
+            return null;
+
+        for(int i = 0; i < current.getSubEmployee().size(); ++i)
+            getEmployeeByID(id, current.getSubEmployee().get(i));
+
+        return null;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public int getDepth()
+    {
+        return depth;
     }
 }
