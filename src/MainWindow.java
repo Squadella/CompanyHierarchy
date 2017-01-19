@@ -1,8 +1,10 @@
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import res.FXController;
 
 public class MainWindow extends Application
 {
@@ -18,18 +20,21 @@ public class MainWindow extends Application
     public void start(Stage stage) throws Exception
     {
         //Loading .fxml from /src/res and setting FXML loader
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/res/CompanyHierarchyUI.fxml"));
-        loader.setController(this);
-        //Creating scene from `loader`
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("res/CompanyHierarchyUI.fxml"));
+        loader.setLocation(MainWindow.class.getResource("res/CompanyHierarchyUI.fxml"));
         Parent root = loader.load();
+        //Creating scene from `loader`
+        //Parent root = loader.load();
         Scene scene = new Scene(root, 1100, 515);
+        FXController controller = loader.getController();
+        controller.changeText("HELLO WORLD!");
         //Stage manipulation
         _stage = stage;
         _stage.setTitle("Company Hierarchy Manager");
         _stage.setScene(scene);
         _stage.setResizable(false);
         _stage.show();
+
     }
 
     //Close application

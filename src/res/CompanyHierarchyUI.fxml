@@ -9,13 +9,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="402.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="402.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="res.FXController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu fx:id="menuQuit" mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#stop" text="Quit" />
+            <MenuItem mnemonicParsing="false"  text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -59,7 +59,7 @@
                   </Pane>
                   <Pane layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="273.0" style="-fx-border-color: #DDDDDD;">
                      <children>
-                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounting departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" />
+                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounting departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" fx:id="test"/>
                         <Text layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="253.15234375" />
                         <Text layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 200" textAlignment="CENTER" wrappingWidth="253.15234375" />
                      </children>
