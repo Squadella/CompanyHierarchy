@@ -11,17 +11,19 @@ public class Employee
     private String sirName;
     private List<Employee> subordinates;
     private Employee supervisor; // For the first element, supervisor = null
+    private int depth;
 
     public Employee(String position, String firstName, String sirName, String department, float salary, int id)
     {
+        this.id=id;
+        this.salary=salary;
+        this.department=department;
         this.position=position;
         this.firstName=firstName;
         this.sirName=sirName;
-        this.department=department;
-        this.salary=salary;
-        this.supervisor=null;
         this.subordinates= new ArrayList<>();
-        this.id=id;
+        this.supervisor=null;
+        this.depth=0;
     }
 
     public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
@@ -34,6 +36,7 @@ public class Employee
         this.supervisor=supervisor;
         this.subordinates=new ArrayList<>();
         this.id=id;
+        this.depth=supervisor.getDepth()+1;
     }
 
     public float getSalary()
@@ -116,6 +119,7 @@ public class Employee
     public void setNewSupervisor(Employee newSupervisor)
     {
         this.supervisor=newSupervisor;
+        this.depth=this.supervisor.getDepth()+1;
     }
 
     public Employee getSupervisor()
@@ -140,5 +144,10 @@ public class Employee
     public int getId()
     {
         return id;
+    }
+
+    public int getDepth()
+    {
+        return depth;
     }
 }

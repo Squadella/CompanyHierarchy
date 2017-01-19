@@ -1,15 +1,14 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Company
 {
-    private int id; //txt the id will be written at the end
+    private int lastID; //txt the lastID will be written at the end
     private Employee CEO;
     private float totalCost;
     private float averageDepartmentCost;
-    private int numberOfEmployee;
     private String mostExpensiveDepartment;
     private String lessExpensiveDepartment;
+    private int numberOfEmployee;
 
     public Company()
     {
@@ -19,12 +18,21 @@ public class Company
         numberOfEmployee=0;
         mostExpensiveDepartment=null;
         lessExpensiveDepartment=null;
-        id=0;
+        lastID=0;
     }
 
     public void moveEmployee(Employee supervisor, Employee employee, List<Employee> subordinates)
     {
-        for(int i=0; i< employee.getSubEmployee().size(); ++i)
+        //Anti-loop system.
+        for(int i=0; i<employee.getSubEmployee().size(); ++i)
+        {
+            if(employee.getSubEmployee().get(i).getDepth()<=employee.getDepth())
+            {
+                System.out.println("ERROR");
+                System.exit(-1);
+            }
+        }
+        for(int i=0; i<employee.getSubEmployee().size(); ++i)
         {
             //Setting supervisor
             employee.getSubEmployee().get(i).setNewSupervisor(employee.getSupervisor());
@@ -42,12 +50,12 @@ public class Company
         if(supervisor==null)
         {
             //Top tree
-            this.CEO = new Employee(position, firstName, sirName, department, salary, null, id);
+            this.CEO = new Employee(position, firstName, sirName, department, salary, null, lastID);
         }
         else
         {
-            id++;
-            supervisor.addSubordinate(new Employee(position, firstName, sirName, department, salary, supervisor, id));
+            ++lastID;
+            supervisor.addSubordinate(new Employee(position, firstName, sirName, department, salary, supervisor, lastID));
         }
     }
 
