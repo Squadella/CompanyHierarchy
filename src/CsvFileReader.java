@@ -7,7 +7,6 @@ import java.util.List;
 
 public class CsvFileReader
 {
-
     private static final String DELIMITER = ";";
     private static final String DELIMITER2 = ",";
 
@@ -36,76 +35,55 @@ public class CsvFileReader
     {
         BufferedReader fileReader = null;
         List<Employee> employees = new ArrayList<>();
-
         try
         {
-
-
             String line = "";
-
             fileReader = new BufferedReader(new FileReader(fileName));
 
-            while ((line = fileReader.readLine()) != null) {
-
-                //Get all tokens available in line
-
+            while ((line = fileReader.readLine()) != null)
+            {
                 String[] tokens = line.split(DELIMITER);
-
-                if (tokens.length > 0) {
-
-                    //Create a new student object and fill his  data
-
+                if (tokens.length > 0)
+                {
                     Employee employee = new Employee(tokens[POSITION], tokens[FIRST_NAME], tokens[SIR_NAME], tokens[DEPARTMENT], Float.parseFloat(tokens[SALARY]),Integer.parseInt(tokens[ID]));
                     employees.add(employee);
-
-
-
                 }
 
             }
             fileReader = new BufferedReader(new FileReader(fileName));
 
-            while ((line = fileReader.readLine()) != null) {
-
+            while ((line = fileReader.readLine()) != null)
+            {
                 //Get all tokens available in line
-
                 String[] tokens = line.split(DELIMITER);
                 List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees);
-                if (tokens.length > 0) {
-                    for(int i = 0; i > subordinates.size(); ++i) {
+                if (tokens.length > 0)
+                {
+                    for(int i = 0; i > subordinates.size(); ++i)
+                    {
                         employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));
                     }
                     employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(Integer.parseInt(tokens[ID])).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
                 }
-
             }
-
-        }catch (Exception e) {
-
-            System.out.println("Error in CsvFileReader !!!");
-
-            e.printStackTrace();
-        }finally {
-
-            try {
-
-                fileReader.close();
-
-            } catch (IOException e) {
-
-                System.out.println("Error while closing fileReader !!!");
-
-                e.printStackTrace();
-
-            }
-
         }
-
-
-
+        catch (Exception e)
+        {
+            System.out.println("Error in CsvFileReader !!!");
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                fileReader.close();
+            }
+            catch (IOException e)
+            {
+                System.out.println("Error while closing fileReader !!!");
+                e.printStackTrace();
+            }
+        }
         return employees;
     }
-
-
-
 }
