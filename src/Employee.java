@@ -124,4 +124,9 @@ public class Employee
     {
         return id;
     }
+
+    public Employee getSupervisor()
+    {
+        return supervisor;
+    }
 }
