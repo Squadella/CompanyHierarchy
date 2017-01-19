@@ -1,14 +1,21 @@
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by zk on 19/01/17.
- */
-class EmployeeTest {
-    @Test
-    void getSirName() {
-        System.out.println("zob");
+class EmployeeTest
+{
+    Employee test;
+
+    @BeforeEach
+    void setUp()
+    {
+        test = new Employee("TEST", "TestFirstName", "TestSirName", "DPT", 0);
+    }
+
+    @org.junit.jupiter.api.Test
+    void getSirName()
+    {
+        assertEquals("TestSirName", test.getSirName());
     }
 
 }
