@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Company
 {
+    private int id; //txt the id will be written at the end
     private Employee CEO;
     private float totalCost;
     private float averageDepartmentCost;
@@ -18,6 +19,7 @@ public class Company
         numberOfEmployee=0;
         mostExpensiveDepartment=null;
         lessExpensiveDepartment=null;
+        id=0;
     }
 
     public void moveEmployee()
@@ -25,10 +27,19 @@ public class Company
 
     }
 
-    public void addEmployee(Employee supervisor)
+    public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
     {
         //TODO: find a way to be place at the superior level
-
+        if(supervisor==null)
+        {
+            //Top tree
+            this.CEO = new Employee(position, firstName, sirName, department, salary, null, id);
+        }
+        else
+        {
+            id++;
+            supervisor.addSubordinate(new Employee(position, firstName, sirName, department, salary, supervisor, id));
+        }
     }
 
     public void getAllEmployee(Employee currentEmployee, List<Employee> allEmployees)
