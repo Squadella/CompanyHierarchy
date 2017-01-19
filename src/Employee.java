@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee
@@ -46,11 +47,13 @@ public class Employee
     public void removeEmployee()
     {
         //TODO : implement remove action.
+        //Moving subordinates to the top level
+        this.supervisor.addSubordinate(this.subordinates);
+
         for(int i=0; i<this.subordinates.size(); ++i)
-        {
-            this.supervisor.addSubordinate(this.subordinates.get(i));
             this.subordinates.get(i).setNewSupervisor(this.supervisor);
-        }
+
+        this.removeAllSubordinate();
         this.supervisor.removeSubordinate(this);
     }
 
@@ -67,6 +70,16 @@ public class Employee
     public void addSubordinate(Employee subordinate)
     {
         subordinates.add(subordinate);
+    }
+
+    public void addSubordinate(List<Employee> subordinates)
+    {
+        this.subordinates.addAll(subordinates);
+    }
+
+    public void removeAllSubordinate()
+    {
+        this.subordinates=new ArrayList<>();
     }
 
     public void removeSubordinate(Employee subordinate)
@@ -90,6 +103,11 @@ public class Employee
     public void setNewSupervisor(Employee newSupervisor)
     {
         this.supervisor=newSupervisor;
+    }
+
+    public Employee getSupervisor()
+    {
+        return supervisor;
     }
 
     public Employee getEmployeeByID(int id, Employee current)

@@ -22,9 +22,18 @@ public class Company
         id=0;
     }
 
-    public void moveEmployee()
+    public void moveEmployee(Employee supervisor, Employee employee, List<Employee> subordinates)
     {
-
+        for(int i=0; i< employee.getSubEmployee().size(); ++i)
+        {
+            //Setting supervisor
+            employee.getSubEmployee().get(i).setNewSupervisor(employee.getSupervisor());
+            //Setting subordinate
+            employee.getSupervisor().addSubordinate(employee.getSubEmployee().get(i));
+        }
+        employee.removeAllSubordinate();
+        employee.addSubordinate(subordinates);
+        employee.setNewSupervisor(supervisor);
     }
 
     public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
@@ -71,6 +80,7 @@ public class Company
 
     public String getMostExpensiveDepartment()
     {
+
         return mostExpensiveDepartment;
     }
 
