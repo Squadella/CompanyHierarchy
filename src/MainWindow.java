@@ -1,30 +1,24 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class MainWindow extends Application
 {
     public static void main(String[] args)
     {
-        System.out.println("Hello World!");
         Application.launch(args);
     }
 
-    public void start(Stage primaryStage)
+    public void start(Stage stage) throws Exception
     {
-        primaryStage.setTitle("Hello World!");
+        Parent root = FXMLLoader.load(getClass().getResource("/res/CompanyHierarchyUI.fxml"));
+        Scene scene = new Scene(root, 1100, 515);
 
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(event -> System.out.println("Hello World!"));
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
-        primaryStage.show();
+        stage.setTitle("Company Hierarchy Manager");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }
