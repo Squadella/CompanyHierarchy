@@ -77,9 +77,9 @@ public class CsvFileReader
                     }
 
                     if(tokens[SUPERVISOR].equals("null")==false)
-                        employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(Integer.parseInt(tokens[ID])).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
-                    else
-                        employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(null);
+                        employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
+                    //else
+                        //employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(null);
                 }
             }
         }
