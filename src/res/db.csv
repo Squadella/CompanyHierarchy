@@ -1,16 +1,16 @@
 0;Jean;DUPOND;Accounting;CEO;16420;null;4,6,12,14
-4;Paul;NODIN;Accounting;Supervisor;3050;1;7,8,9,13,16,20,22,23
+4;Paul;NODIN;Accounting;Supervisor;3050;0;7,8,9,13,16,20,22,23
 1;Trevor;PHILIPS;Accounting;Laquais;930;4;null
 2;Pierre;DUBOIS;Sales;Laquais;5200;12;null
 3;Marc;BERTRAND;Sales;Laquais;2600;12;null
 5;Bruno;BOUNIOL;Marketing;Laquais;2048;14;null
-6;Louis;CHEVALLIER;Manufacturing;Supervisor;4096;1;10,11,17,19
+6;Louis;CHEVALLIER;Manufacturing;Supervisor;4096;0;10,11,17,19
 7;Erwan;LE GUERN;Accounting;Laquais;8192;4;null
 8;Philippe;LEBFEVRE;Accounting;Laquais;1300;4;null
 9;Guillaume;ROUX;Accounting;Laquais;2600;4;null
 10;Lorenzo;MARTINEZ;Manufacturing;Laquais;1654;6;null
 11;Emma;GUERIN;Manufacturing;Laquais;1940;6;null
-12;Anna;TAILLET;Sales;Supervisor;4561;1;2,3
+12;Anna;TAILLET;Sales;Supervisor;4561;0;2,3
 13;Thomas;DONADIEU;Accounting;Laquais;3215;4;null
 14;Victor;PHAM;Marketing;Supervisor;6214;1;5,15,18,21,24
 15;Jean;BRUN;Marketing;Laquais;1235;14;null

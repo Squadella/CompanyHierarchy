@@ -111,7 +111,7 @@ public class Company
         List<Employee> nextEmployee = new ArrayList<>();
         allEmployees.add(CEO);
         nextEmployee.addAll(CEO.getSubEmployee());
-        while(nextEmployee.size()<0)
+        while(nextEmployee.size()>0)
         {
             allEmployees.add(nextEmployee.get(0));
             nextEmployee.addAll(nextEmployee.get(0).getSubEmployee());
