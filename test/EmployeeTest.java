@@ -26,7 +26,7 @@ class EmployeeTest {
 
     @Test
     void getDepartment() {
-        assertEquals("Marketing", test.getDepartment());
+        assertEquals("Market    ing", test.getDepartment());
     }
 
     @Test

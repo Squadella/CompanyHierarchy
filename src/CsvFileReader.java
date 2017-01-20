@@ -40,6 +40,7 @@ public class CsvFileReader
 
     public List<Employee> readCsvFile(String fileName)
     {
+
         BufferedReader fileReader = null;
         List<Employee> employees = new ArrayList<>();
         try
@@ -69,12 +70,16 @@ public class CsvFileReader
                 if (tokens.length > 0)
                 {
                     List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees);
-                    for(int i = 0; i < subordinates.size(); ++i)
-                    {
-                        employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));
+                    if (subordinates.size() != 0 && subordinates.get(0) != null) {
+                        for (int i = 0; i < subordinates.size(); ++i) {
+                            employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));
+                        }
                     }
-                    if(!tokens[SUPERVISOR].equals("null"))
+
+                    if(tokens[SUPERVISOR].equals("null")==false)
                         employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(Integer.parseInt(tokens[ID])).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
+                    else
+                        employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(null);
                 }
             }
         }

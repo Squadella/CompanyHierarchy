@@ -2,6 +2,7 @@ import app.Employee;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class CsvFileWriter
 {
@@ -9,32 +10,44 @@ public class CsvFileWriter
     private static final String DELIMITER2 = ",";
     private static final String SEPARATOR = "\n";
 
-    public static void writeCsvFile(String fileName, Employee current)
+    public static void writeCsvFile(String fileName, List<Employee> Employees)
     {
         FileWriter fileWriter = null;
         try
         {
-            fileWriter = new FileWriter(fileName,true);
+            fileWriter = new FileWriter(fileName);
+            for(int i = 0; i < Employees.size(); ++i) {
 
-            fileWriter.append(String.valueOf(current.getId()));
-            fileWriter.append(DELIMITER);
-            fileWriter.append(current.getSirName());
-            fileWriter.append(DELIMITER);
-            fileWriter.append(current.getFirstName());
-            fileWriter.append(DELIMITER);
-            fileWriter.append(current.getDepartment());
-            fileWriter.append(DELIMITER);
-            fileWriter.append(current.getPosition());
-            fileWriter.append(DELIMITER);
-            fileWriter.append(String.valueOf(current.getSalary()));
-            fileWriter.append(DELIMITER);
-            fileWriter.append(String.valueOf(current.getSupervisor().getId()));
-            for(int i = 0; i < current.getSubEmployee().size(); ++i)
-            {
-                fileWriter.append(String.valueOf(current.getSubEmployee().get(i).getId()));
-                fileWriter.append(DELIMITER2);
+
+
+                fileWriter.append(String.valueOf(Employees.get(i).getId()));
+                fileWriter.append(DELIMITER);
+                fileWriter.append(Employees.get(i).getSirName());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(Employees.get(i).getFirstName());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(Employees.get(i).getDepartment());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(Employees.get(i).getPosition());
+                fileWriter.append(DELIMITER);
+                fileWriter.append(String.valueOf(Employees.get(i).getSalary()));
+                fileWriter.append(DELIMITER);
+                if(Employees.get(i).getSupervisor() != null) {
+                    fileWriter.append(String.valueOf(Employees.get(i).getSupervisor().getId()));
+                }
+                else
+                    fileWriter.append("null");
+                fileWriter.append(DELIMITER);
+                if(Employees.get(i).getSubEmployee().size() != 0) {
+                    for (int j = 0; j < Employees.get(i).getSubEmployee().size(); ++j) {
+                        fileWriter.append(String.valueOf(Employees.get(i).getSubEmployee().get(i).getId()));
+                        fileWriter.append(DELIMITER2);
+                    }
+                }
+                else
+                    fileWriter.append("null");
+                fileWriter.append(SEPARATOR);
             }
-            fileWriter.append(SEPARATOR);
         }
         catch (Exception e)
         {
