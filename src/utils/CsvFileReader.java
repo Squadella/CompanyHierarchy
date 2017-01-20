@@ -24,9 +24,10 @@ public class CsvFileReader
     private static final int SUBORDINATES = 7;
 
 
-    private List<Employee> getSubordinates(String subFile,List<Employee> employees)
+    private List<Employee> getSubordinates(String subFile, Employee CEO)
     {
         List<Employee> subordinates = new ArrayList<>();
+        Employee temp;
         if(subFile.equals("null"))
             return subordinates;
 
@@ -34,7 +35,8 @@ public class CsvFileReader
 
         if(tokens.length>0){
             for (int i = 0; i < tokens.length; ++i) {
-                subordinates.add(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[i]), employees.get(0)));
+                temp = CEO.getEmployeeByID(Integer.parseInt(tokens[i]), CEO);
+                subordinates.add(temp);
             }
         }
         return subordinates;
@@ -71,7 +73,7 @@ public class CsvFileReader
 
                 if (tokens.length > 0)
                 {
-                    List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees);
+                    List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees.get(0));
                     if (subordinates.size() != 0 && subordinates.get(0) != null) {
                         for (int i = 0; i < subordinates.size(); ++i) {
                             employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));

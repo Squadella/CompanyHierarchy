@@ -1,5 +1,5 @@
+import app.Company;
 import app.Employee;
-import org.testng.annotations.Test;
 import org.junit.jupiter.api.BeforeEach;
 import utils.CsvFileReader;
 import utils.CsvFileWriter;
@@ -14,6 +14,7 @@ class CsvFileWriterTest {
     Employee test;
     Employee subEmployee;
     List<Employee> employees = new ArrayList<Employee>();
+    Company testC = new Company();
 
     @BeforeEach
     public void initialize()
@@ -30,10 +31,11 @@ class CsvFileWriterTest {
     void writeCsvFile(){
         CsvFileWriter test = new CsvFileWriter();
         CsvFileReader testR = new CsvFileReader();
-        String fileName = "/home/zk/Cours/CompanyHierarchy/resTest/testFile.csv";
+        String fileName = "D:\\_Perso\\Owncloud\\Cours\\4A\\CompanyHierarchy\\resTest\\testFile.csv";
         test.writeCsvFile(fileName, employees);
-        List<Employee> testRL= testR.readCsvFile(fileName);
-        assertEquals(employees.size(), testRL.size());
+        testC.loadCompanyFromFile(fileName);
+        Employee boss = testR.readCsvFile(fileName);
+        assertEquals(employees.size(), testC.getAllEmployee().size());
     }
 
 

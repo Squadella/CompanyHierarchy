@@ -48,7 +48,7 @@ public class MainWindow extends Application
     {
         //Charger les employees
         String fileName="FILE NAME OF CSV";
-        _company.loadCompanyfromFile(fileName);
+        _company.loadCompanyFromFile(fileName);
         loadListView(_company.getAllEmployee());
         refreshUI();
     }

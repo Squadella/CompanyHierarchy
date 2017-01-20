@@ -24,13 +24,11 @@ class CsvFileReaderTest {
     void readCsvFile()
     {
 
-        List<Employee> list=new ArrayList<>();
-        list.add(test);
+
         CsvFileReader testRdr;
         testRdr = new CsvFileReader();
-        String fileNameTest = "/home/zk/Cours/CompanyHierarchy/resTest/testFile.csv";
-        List<Employee> testFile = testRdr.readCsvFile(fileNameTest);
-        assertEquals(list.get(0).getId(), testFile.get(0).getId());
+        String fileNameTest = "D:\\_Perso\\Owncloud\\Cours\\4A\\CompanyHierarchy\\resTest\\testFile.csv";
+        assertEquals(test.getId(), testRdr.readCsvFile(fileNameTest).getId());
 
     }
 
