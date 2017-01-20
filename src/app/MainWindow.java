@@ -47,7 +47,7 @@ public class MainWindow extends Application
     private void loadUI()
     {
         //Charger les employees
-        String fileName="FILE NAME OF CSV";
+        String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
         _company.loadCompanyFromFile(fileName);
         loadListView(_company.getAllEmployee());
         refreshUI();

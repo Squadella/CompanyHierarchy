@@ -135,18 +135,18 @@ public class Employee
         return supervisor;
     }
 
-    public Employee getEmployeeByID(int id, Employee current)
+    public Employee getEmployeeByID(int id, Employee startEmployee)
     {
-        if(this.id == id)
-            return this;
-
-        if(current.getSubEmployee() == null)
-            return null;
-
-        for(int i = 0; i < current.getSubEmployee().size(); ++i)
-            getEmployeeByID(id, current.getSubEmployee().get(i));
-        
-
+        List<Employee> nextEmployees = new ArrayList<>();
+        nextEmployees.addAll(startEmployee.getSubEmployee());
+        //Browse all employee from the startEmployee.
+        while(nextEmployees.size()<0)
+        {
+            if(nextEmployees.get(0).getId()==id)
+                return nextEmployees.get(0);
+            nextEmployees.addAll(nextEmployees.get(0).getSubEmployee());
+            nextEmployees.remove(0);
+        }
         return null;
     }
 

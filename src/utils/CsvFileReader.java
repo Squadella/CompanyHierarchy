@@ -24,22 +24,23 @@ public class CsvFileReader
     private static final int SUBORDINATES = 7;
 
 
-    private List<Employee> getSubordinates(String subFile, Employee CEO)
+    private void setSubordinates(String subFile, List<Employee> employees, Employee currentEmployee)
     {
         List<Employee> subordinates = new ArrayList<>();
-        Employee temp;
         if(subFile.equals("null"))
-            return subordinates;
+            return ;
 
         String[] tokens = subFile.split(DELIMITER2);
-
-        if(tokens.length>0){
-            for (int i = 0; i < tokens.length; ++i) {
-                temp = CEO.getEmployeeByID(Integer.parseInt(tokens[i]), CEO);
-                subordinates.add(temp);
+        for (String token: tokens)
+        {
+            for (Employee employee : employees)
+            {
+                if (Integer.parseInt(token) == employee.getId())
+                {
+                    currentEmployee.addSubordinate(employee);
+                }
             }
         }
-        return subordinates;
     }
 
     public Employee readCsvFile(String fileName)
@@ -57,7 +58,6 @@ public class CsvFileReader
                 String[] tokens = line.split(DELIMITER);
                 if (tokens.length > 0)
                 {
-
                     Employee employee = new Employee(tokens[POSITION], tokens[FIRST_NAME], tokens[SIR_NAME], tokens[DEPARTMENT], Float.parseFloat(tokens[SALARY]),Integer.parseInt(tokens[ID]));
                     employees.add(employee);
                 }
@@ -65,17 +65,28 @@ public class CsvFileReader
             }
 
             fileReader = new BufferedReader(new FileReader(fileName));
-
+            int count = 0;
+            while ((line = fileReader.readLine()) != null)
+            {
+                String[] tokens = line.split(DELIMITER);
+                if (tokens.length > 0)
+                {
+                    if(tokens[SUBORDINATES]!=null)
+                        setSubordinates(tokens[SUBORDINATES], employees, employees.get(count));
+                }
+                count++;
+            }
+            /*
             while ((line = fileReader.readLine()) != null)
             {
                 //Get all tokens available in line
                 String[] tokens = line.split(DELIMITER);
-
                 if (tokens.length > 0)
                 {
-                    List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees.get(0));
-                    if (subordinates.size() != 0 && subordinates.get(0) != null) {
-                        for (int i = 0; i < subordinates.size(); ++i) {
+                    List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees, employees.get(0));
+                    if (subordinates.size() != 0) {
+                        for (int i = 0; i < subordinates.size(); ++i)
+                        {
                             employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));
                         }
                     }
@@ -84,6 +95,7 @@ public class CsvFileReader
                         employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
                 }
             }
+            */
         }
         catch (Exception e)
         {
