@@ -1,6 +1,7 @@
 package app;
 
 import javafx.application.Platform;
+import utils.CsvFileReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,5 +154,10 @@ public class Company
     public Employee getCEO()
     {
         return CEO;
+    }
+
+    public void loadCompanyfromFile(String file)
+    {
+        this.CEO = new CsvFileReader().readCsvFile(file);
     }
 }

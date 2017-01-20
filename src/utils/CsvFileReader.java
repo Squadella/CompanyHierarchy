@@ -40,7 +40,7 @@ public class CsvFileReader
         return subordinates;
     }
 
-    public List<Employee> readCsvFile(String fileName)
+    public Employee readCsvFile(String fileName)
     {
 
         BufferedReader fileReader = null;
@@ -78,10 +78,8 @@ public class CsvFileReader
                         }
                     }
 
-                    if(tokens[SUPERVISOR].equals("null")==false)
+                    if(!tokens[SUPERVISOR].equals("null"))
                         employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
-                    //else
-                        //employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(null);
                 }
             }
         }
@@ -102,6 +100,6 @@ public class CsvFileReader
                 e.printStackTrace();
             }
         }
-        return employees;
+        return employees.get(0);
     }
 }

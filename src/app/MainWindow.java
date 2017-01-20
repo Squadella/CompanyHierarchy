@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import res.FXController;
 
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +47,8 @@ public class MainWindow extends Application
     private void loadUI()
     {
         //Charger les employees
+        String fileName="FILE NAME OF CSV";
+        _company.loadCompanyfromFile(fileName);
         loadListView(_company.getAllEmployee());
         refreshUI();
     }
