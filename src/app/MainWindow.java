@@ -1,3 +1,5 @@
+package app;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -5,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import res.FXController;
 
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +25,24 @@ public class MainWindow extends Application
     public void start(Stage stage) throws Exception
     {
         //Loading .fxml from /src/res and setting FXML loader (w/ controller)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("res/CompanyHierarchyUI.fxml"));
-        loader.setLocation(MainWindow.class.getResource("res/CompanyHierarchyUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/res/CompanyHierarchyUI.fxml"));
+        loader.setLocation(MainWindow.class.getResource("/res/CompanyHierarchyUI.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1100, 515);
         _controller = loader.getController();
         _company = new Company();
 
         //Stage manipulation
-        stage.setTitle("Company Hierarchy Manager");
+        stage.setTitle("app.Company Hierarchy Manager");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
 
         loadUI();
+
+        _controller.getListViewEmployee().getSelectionModel().selectedItemProperty().addListener((observable, oldValue, id) -> {
+            refreshEmployee(observable.getValue());
+        });
     }
 
     private void loadUI()
@@ -46,7 +53,7 @@ public class MainWindow extends Application
         refreshUI();
     }
 
-    //Refresh everything in UI except Employee frame
+    //Refresh everything in UI except app.Employee frame
     private void refreshUI()
     {
         _controller.setTextTotalHRExpenses("Total HR expenses : " + _company.getTotalCost() + " $");
@@ -70,14 +77,39 @@ public class MainWindow extends Application
         //Actualiser l'affichage pour employee
     }
 
+    public void refreshEmployee(Employee employee)
+    {
+        _controller.setTextEmployeeFirstName(employee.getFirstName());
+        _controller.setTextEmployeeLastName(employee.getSirName());
+        _controller.setTextEmployeeDpt(employee.getDepartment());
+        _controller.setTextEmployeePosition(employee.getPosition());
+        _controller.setTextEmployeeSalary(Float.toString(employee.getSalary()));
+
+        if(employee.getSupervisor() != null)
+            _controller.setTextEmployeeSuperior(employee.getSupervisor().toString());
+        else
+            _controller.setTextEmployeeSuperior("No superior");
+
+        if(employee.getSubEmployee().size() != 0)
+        {
+            String tmp = employee.getSubEmployee().get(0).toString();
+
+            for(int i = 1; i < employee.getSubEmployee().size() ; ++i)
+                tmp += ", " + employee.getSubEmployee().get(i);
+
+            _controller.setTextEmployeeSubordonate(tmp);
+        }
+        else
+            _controller.setTextEmployeeSubordonate("No subordinates");
+    }
+
     //Load `listViewEmployee` w/ magic
     private void loadListView(/* Pass employee list */)
     {
-        List<String> tmp = new ArrayList<>();
+        List<Employee> tmp = new ArrayList<>();
 
-        tmp.add("1");
-        tmp.add("2");
-        tmp.add("3");
+        tmp.add(new Employee("First", "Last", "Con", "dpt", 2000, 0));
+        tmp.add(new Employee("First", "Last", "Con", "dpt", 2000, 1));
 
         _controller.fillListView(tmp);
     }

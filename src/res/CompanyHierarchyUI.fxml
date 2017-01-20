@@ -49,7 +49,7 @@
                <children>
                   <Pane layoutX="17.0" layoutY="14.0" prefHeight="107.0" prefWidth="559.0" style="-fx-border-color: #DDDDDD;">
                      <children>
-                        <Text layoutX="163.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company statistics" textAlignment="CENTER" underline="true" wrappingWidth="232.15234375" />
+                        <Text layoutX="163.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="app.Company statistics" textAlignment="CENTER" underline="true" wrappingWidth="232.15234375" />
                         <Text fx:id="textTotalHRExpenses" layoutX="130.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total HR expenses : 12 000 $" textAlignment="CENTER" wrappingWidth="298.7294921875" />
                         <Text fx:id="textTotalEmployee" layoutX="130.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 800" textAlignment="CENTER" wrappingWidth="298.7294921875" />
                         <Text fx:id="textMostExpDpt" layoutX="130.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Most expensive departement : Sales" textAlignment="CENTER" wrappingWidth="298.7294921875" />
@@ -87,7 +87,7 @@
                   </Pane>
                   <Pane layoutX="16.0" layoutY="300.0" prefHeight="170.0" prefWidth="559.0" style="-fx-border-color: #DDDDDD;">
                      <children>
-                        <Text layoutX="9.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee information :" textAlignment="CENTER" underline="true" wrappingWidth="541.15234375" />
+                        <Text layoutX="9.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="app.Employee information :" textAlignment="CENTER" underline="true" wrappingWidth="541.15234375" />
                         <Text fx:id="textEmployeeFirstName" layoutX="9.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name : Jean" textAlignment="CENTER" wrappingWidth="541.15234375" />
                         <Text fx:id="textEmployeeLastName" layoutX="9.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name : Dupond" textAlignment="CENTER" wrappingWidth="541.15234375" />
                         <Text fx:id="textEmployeeDpt" layoutX="9.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departement : Accounting" textAlignment="CENTER" wrappingWidth="541.15234375" />

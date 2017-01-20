@@ -1,5 +1,6 @@
 package res;
 
+import app.Employee;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class FXController {
 
-    @FXML private ListView<String> listViewEmployee;
+    @FXML private ListView<Employee> listViewEmployee;
 
     @FXML private Text textTotalHRExpenses;
     @FXML private Text textTotalEmployee;
@@ -42,7 +43,7 @@ public class FXController {
 
     @FXML private Menu menuQuit;
 
-    public void fillListView(List<String> employeeList)
+    public void fillListView(List<Employee> employeeList)
     {
         listViewEmployee.setItems(FXCollections.observableArrayList(employeeList));
     }
@@ -76,5 +77,10 @@ public class FXController {
     public void stop(ActionEvent actionEvent)
     {
         Platform.exit();
+    }
+
+    public ListView<Employee> getListViewEmployee()
+    {
+        return listViewEmployee;
     }
 }

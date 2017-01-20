@@ -1,3 +1,5 @@
+package app;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Employee
     private String firstName;
     private String sirName;
     private List<Employee> subordinates;
-    private Employee supervisor; // For the first element, supervisor = null
+    private Employee supervisor; //For the first element, supervisor = null
     private int depth;
 
     public Employee(String position, String firstName, String sirName, String department, float salary, int id)
@@ -36,7 +38,13 @@ public class Employee
         this.supervisor = supervisor;
         this.subordinates = new ArrayList<>();
         this.id = id;
-        this.depth = supervisor.getDepth()+1;
+        this.depth = supervisor.getDepth() + 1;
+    }
+
+    @Override
+    public String toString()
+    {
+        return firstName + " " + sirName + " - " + position;
     }
 
     public float getSalary()
