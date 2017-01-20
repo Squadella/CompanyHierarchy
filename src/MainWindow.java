@@ -51,9 +51,9 @@ public class MainWindow extends Application
     {
         _controller.setTextTotalHRExpenses("Total HR expenses : " + _company.getTotalCost() + " $");
         _controller.setTextTotalEmployee("Number of employees : " + _company.getEmployeeNumber());
-        _controller.setTextMostExpDpt("Most expensive departement : " + _company.getMostExpensiveDepartment());
-        _controller.setTextLessExpDpt("Less expensive departement : " + _company.getLessExpensiveDepartment());
-        _controller.setTextAverageDptExp("Average departement expenses : " + _company.getAverageDepartmentCost() + " $");
+        _controller.setTextMostExpDpt("Most expensive department : " + _company.getMostExpensiveDepartment());
+        _controller.setTextLessExpDpt("Less expensive department : " + _company.getLessExpensiveDepartment());
+        _controller.setTextAverageDptExp("Average department expenses : " + _company.getAverageDepartmentCost() + " $");
 
         _controller.setTextAccExpenses("Total expenses : " + Float.toString(_company.getDptExpenses("Accounting")) + " $");
         _controller.setTextAccEmployee("Number of employees : " + Float.toString(_company.getDptEmployee("Accounting")));
