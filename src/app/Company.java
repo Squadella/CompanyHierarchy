@@ -2,6 +2,7 @@ package app;
 
 import javafx.application.Platform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Company
@@ -65,56 +66,57 @@ public class Company
 
     public float getDptExpenses(String dpt)
     {
-        float totalExpense = 0;
-
-        switch(dpt)
+        float totalSalary = 0;
+        List<Employee> nextEmployee = new ArrayList<>();
+        if(CEO==null)
         {
-            case "Accounting" :
-                break;
-            case "Sales" :
-                break;
-            case "Marketing" :
-                break;
-            case "Manufacturing" :
-                break;
-            default :
-                Platform.exit();
+            return 0;
         }
-
-        return totalExpense;
+        nextEmployee.addAll(CEO.getSubEmployee());
+        while(nextEmployee.size()>0) {
+            if (nextEmployee.get(0).getDepartment().equals(dpt)) {
+                totalSalary+= nextEmployee.get(0).getSalary();
+            }
+            nextEmployee.addAll(nextEmployee.get(0).getSubEmployee());
+            nextEmployee.remove(0);
+        }
+        return totalSalary;
     }
 
     public int getDptEmployee(String dpt)
     {
         int totalEmployees = 0;
-
-        switch(dpt)
+        List<Employee> nextEmployee = new ArrayList<>();
+        if(CEO==null)
         {
-            case "Accounting" :
-                break;
-            case "Sales" :
-                break;
-            case "Marketing" :
-                break;
-            case "Manufacturing" :
-                break;
-            default :
-                Platform.exit();
+            return 0;
         }
-
+        nextEmployee.addAll(CEO.getSubEmployee());
+        while(nextEmployee.size()>0) {
+            if (nextEmployee.get(0).getDepartment().equals(dpt)) {
+                totalEmployees++;
+            }
+            nextEmployee.addAll(nextEmployee.get(0).getSubEmployee());
+            nextEmployee.remove(0);
+        }
         return totalEmployees;
     }
 
-    public void getAllEmployee(Employee currentEmployee, List<Employee> allEmployees)
+    public List<Employee> getAllEmployee()
     {
-        if(currentEmployee.getSubEmployee()!=null)
+        if(CEO==null)
+            return new ArrayList<>();
+        List<Employee> allEmployees = new ArrayList<>();
+        List<Employee> nextEmployee = new ArrayList<>();
+        allEmployees.add(CEO);
+        nextEmployee.addAll(CEO.getSubEmployee());
+        while(nextEmployee.size()<0)
         {
-            for(int i = 0; i < currentEmployee.getSubEmployee().size(); ++i)
-            {
-                allEmployees.add(currentEmployee.getSubEmployee().get(i));
-                getAllEmployee(currentEmployee.getSubEmployee().get(i), allEmployees);
-            }
+            allEmployees.add(nextEmployee.get(0));
+            nextEmployee.addAll(nextEmployee.get(0).getSubEmployee());
+            nextEmployee.remove(0);
         }
+        return allEmployees;
     }
 
     public Employee getEmployeeByID(int id)

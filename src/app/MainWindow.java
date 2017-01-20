@@ -47,9 +47,8 @@ public class MainWindow extends Application
 
     private void loadUI()
     {
-        //Charger société en attributs locaux
         //Charger les employees
-        loadListView(/* Pass employee list here */);
+        loadListView(_company.getAllEmployee());
         refreshUI();
     }
 
@@ -104,13 +103,14 @@ public class MainWindow extends Application
     }
 
     //Load `listViewEmployee` w/ magic
-    private void loadListView(/* Pass employee list */)
+    private void loadListView(List<Employee> allEmployees)
     {
-        List<Employee> tmp = new ArrayList<>();
-
-        tmp.add(new Employee("First", "Last", "Con", "dpt", 2000, 0));
-        tmp.add(new Employee("First", "Last", "Con", "dpt", 2000, 1));
-
-        _controller.fillListView(tmp);
+        if(allEmployees.size()<=0)
+        {
+            List<Employee> tmp = new ArrayList<>();
+            tmp.add(new Employee("position", "no Employee", "", "", 0, -1));
+            _controller.fillListView(tmp);
+        }
+        _controller.fillListView(allEmployees);
     }
 }
