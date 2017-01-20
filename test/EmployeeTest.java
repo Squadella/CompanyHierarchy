@@ -6,9 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by Sauce Ultra on 19/01/2017.
- */
+
 class EmployeeTest {
     Employee test;
     Employee subEmployee;

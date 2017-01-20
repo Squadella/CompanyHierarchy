@@ -22,11 +22,16 @@ public class CsvFileReader
 
     private List<Employee> getSubordinates(String subFile,List<Employee> employees)
     {
-        String[] tokens = subFile.split(DELIMITER2);
         List<Employee> subordinates = new ArrayList<>();
+        if(subFile.equals("null"))
+            return subordinates;
 
-        for(int i = 0; i < tokens.length; ++i) {
-            subordinates.add(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[i]), employees.get(0)));
+        String[] tokens = subFile.split(DELIMITER2);
+
+        if(tokens.length>0){
+            for (int i = 0; i < tokens.length; ++i) {
+                subordinates.add(employees.get(0).getEmployeeByID(Integer.parseInt(tokens[i]), employees.get(0)));
+            }
         }
         return subordinates;
     }
@@ -45,25 +50,29 @@ public class CsvFileReader
                 String[] tokens = line.split(DELIMITER);
                 if (tokens.length > 0)
                 {
+
                     Employee employee = new Employee(tokens[POSITION], tokens[FIRST_NAME], tokens[SIR_NAME], tokens[DEPARTMENT], Float.parseFloat(tokens[SALARY]),Integer.parseInt(tokens[ID]));
                     employees.add(employee);
                 }
 
             }
+
             fileReader = new BufferedReader(new FileReader(fileName));
 
             while ((line = fileReader.readLine()) != null)
             {
                 //Get all tokens available in line
                 String[] tokens = line.split(DELIMITER);
-                List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees);
+
                 if (tokens.length > 0)
                 {
-                    for(int i = 0; i > subordinates.size(); ++i)
+                    List<Employee> subordinates = getSubordinates(tokens[SUBORDINATES],employees);
+                    for(int i = 0; i < subordinates.size(); ++i)
                     {
                         employees.get(Integer.parseInt(tokens[ID])).addSubordinate(subordinates.get(i));
                     }
-                    employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(Integer.parseInt(tokens[ID])).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
+                    if(!tokens[SUPERVISOR].equals("null"))
+                        employees.get(Integer.parseInt(tokens[ID])).setNewSupervisor(employees.get(Integer.parseInt(tokens[ID])).getEmployeeByID(Integer.parseInt(tokens[SUPERVISOR]),employees.get(Integer.parseInt(tokens[ID]))));
                 }
             }
         }
