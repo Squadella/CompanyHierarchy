@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="402.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="res.FXController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu fx:id="menuQuit" mnemonicParsing="false" onAction="#stop" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About CompanyHierarchy" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="436.0" prefWidth="1100.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Pane layoutY="-2.0" prefHeight="485.0" prefWidth="139.0">
+               <children>
+                  <Button layoutX="12.5" layoutY="12.5" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Hire employee" />
+                  <Button layoutX="12.5" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Fire employee" />
+                  <Button layoutX="12.5" layoutY="87.5" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Move employee" />
+               </children>
+            </Pane>
+            <Pane layoutX="148.0" prefHeight="485.0" prefWidth="357.0">
+               <children>
+                  <ListView fx:id="listViewEmployee" layoutX="7.0" layoutY="35.0" prefHeight="435.0" prefWidth="348.0" />
+                  <Text layoutX="13.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees list :" wrappingWidth="325.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="505.0" prefHeight="485.0" prefWidth="592.0">
+               <children>
+                  <Pane layoutX="17.0" layoutY="14.0" prefHeight="107.0" prefWidth="559.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="163.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="app.Company statistics" textAlignment="CENTER" underline="true" wrappingWidth="232.15234375" />
+                        <Text fx:id="textTotalHRExpenses" layoutX="130.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total HR expenses : 12 000 $" textAlignment="CENTER" wrappingWidth="298.7294921875" />
+                        <Text fx:id="textTotalEmployee" layoutX="130.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 800" textAlignment="CENTER" wrappingWidth="298.7294921875" />
+                        <Text fx:id="textMostExpDpt" layoutX="130.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Most expensive departement : Sales" textAlignment="CENTER" wrappingWidth="298.7294921875" />
+                        <Text fx:id="textLessExpDpt" layoutX="130.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Less expensive departement : Marketing" textAlignment="CENTER" wrappingWidth="298.7294921875" />
+                        <Text fx:id="textAverageDptExp" layoutX="130.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average departement expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="298.7294921875" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="273.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounting departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" />
+                        <Text fx:id="textAccExpenses" layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                        <Text fx:id="textAccEmployee" layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 200" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="304.0" layoutY="132.0" prefHeight="70.0" prefWidth="273.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" />
+                        <Text fx:id="textSalesExpenses" layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                        <Text fx:id="textSalesEmployee" layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 200" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="16.0" layoutY="215.0" prefHeight="70.0" prefWidth="273.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marketing departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" />
+                        <Text fx:id="textMarkExpenses" layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                        <Text fx:id="textMarkEmployee" layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 200" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="304.0" layoutY="215.0" prefHeight="70.0" prefWidth="273.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="10.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacturing departement :" textAlignment="CENTER" underline="true" wrappingWidth="253.15234375" />
+                        <Text fx:id="textManuExpenses" layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total expenses : 4 000 $" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                        <Text fx:id="textManuEmployee" layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of employees : 200" textAlignment="CENTER" wrappingWidth="253.15234375" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="16.0" layoutY="300.0" prefHeight="170.0" prefWidth="559.0" style="-fx-border-color: #DDDDDD;">
+                     <children>
+                        <Text layoutX="9.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="app.Employee information :" textAlignment="CENTER" underline="true" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeFirstName" layoutX="9.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name : Jean" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeLastName" layoutX="9.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name : Dupond" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeDpt" layoutX="9.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departement : Accounting" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeePosition" layoutX="9.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position : Manager" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeSalary" layoutX="9.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary : 4 300 $" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeSuperior" layoutX="9.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Superior : Pierre" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                        <Text fx:id="textEmployeeSubordonate" layoutX="9.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subordonates : Marc, Jean, Paul" textAlignment="CENTER" wrappingWidth="541.15234375" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
