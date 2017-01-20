@@ -154,11 +154,6 @@ public class Employee
         return id;
     }
 
-    public Employee getSupervisor()
-    {
-        return supervisor;
-    }
-    
     public int getDepth()
     {
         return depth;
