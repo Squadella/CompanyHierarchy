@@ -5,7 +5,10 @@ import app.Employee;
 import app.MainWindow;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -127,6 +130,7 @@ public class FXController {
 
         superior.setMaxHeight(200);
         subordonates.setMaxHeight(200);
+        subordonates.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         grid.add(new Label("First name :"), 0, 0);
         grid.add(firstName, 1, 0);
@@ -142,6 +146,20 @@ public class FXController {
         grid.add(superior, 1, 5);
         grid.add(new Label("Subordonates :"), 0, 6);
         grid.add(subordonates, 1, 6);
+
+        subordonates.setOnMouseClicked(new EventHandler<Event>() {
+
+            @Override
+            public void handle(Event event) {
+                ObservableList<String> selectedItems = subordonates.getSelectionModel().getSelectedItems();
+
+                for(String s : selectedItems){
+                    System.out.println("selected item " + s);
+                }
+
+            }
+
+        });
 
         if(company.getAllEmployee().size()<=0)
         {
