@@ -1,5 +1,6 @@
 package res;
 
+import app.Company;
 import app.Employee;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -9,9 +10,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FXController {
+
+    private Company company;
 
     @FXML private ListView<Employee> listViewEmployee;
 
@@ -97,5 +101,79 @@ public class FXController {
     public void moveEmployee()
     {
         System.out.print("Move");
+    }
+
+    public void loadUI()
+    {
+        //Charger les employees
+        company = new Company();
+        String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
+        //String fileName="/home/messmaker/Documents/Programming/Java/CompanyHierarchy/src/res/db.csv";
+        company.loadCompanyFromFile(fileName);
+        company.generateStats();
+        loadListView(company.getAllEmployee());
+        refreshUI();
+    }
+
+    //Refresh everything in UI except app.Employee frame
+    private void refreshUI()
+    {
+        setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
+        setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
+        setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());
+        setTextLessExpDpt("Less expensive department : " + company.getLessExpensiveDepartment());
+        setTextAverageDptExp("Average department expenses : " + company.getAverageDepartmentCost() + " $");
+
+        setTextAccExpenses("Total expenses : " + Float.toString(company.getDptExpenses("Accounting")) + " $");
+        setTextAccEmployee("Number of employees : " + Float.toString(company.getDptEmployee("Accounting")));
+
+        setTextSalesExpenses("Total expenses : " + Float.toString(company.getDptExpenses("Sales")) + " $");
+        setTextSalesEmployee("Number of employees : " + Float.toString(company.getDptEmployee("Sales")));
+
+        setTextMarkExpenses("Total expenses : " + Float.toString(company.getDptExpenses("Marketing")) + " $");
+        setTextMarkEmployee("Number of employees : " + Float.toString(company.getDptEmployee("Marketing")));
+
+        setTextManuExpenses("Total expenses : " + Float.toString(company.getDptExpenses("Manufacturing")) + " $");
+        setTextManuEmployee("Number of employees : " + Float.toString(company.getDptEmployee("Manufacturing")));
+
+        //Actualiser l'affichage pour employee
+    }
+
+    public void refreshEmployee(Employee employee)
+    {
+        setTextEmployeeFirstName(employee.getFirstName());
+        setTextEmployeeLastName(employee.getSirName());
+        setTextEmployeeDpt(employee.getDepartment());
+        setTextEmployeePosition(employee.getPosition());
+        setTextEmployeeSalary(Float.toString(employee.getSalary()));
+
+        if(employee.getSupervisor() != null)
+            setTextEmployeeSuperior(employee.getSupervisor().toString());
+        else
+            setTextEmployeeSuperior("No superior");
+
+        if(employee.getSubEmployee().size() != 0)
+        {
+            String tmp = employee.getSubEmployee().get(0).toString();
+
+            for(int i = 1; i < employee.getSubEmployee().size() ; ++i)
+                tmp += ", " + employee.getSubEmployee().get(i);
+
+            setTextEmployeeSubordonate(tmp);
+        }
+        else
+            setTextEmployeeSubordonate("No subordinates");
+    }
+
+    //Load `listViewEmployee` w/ magic
+    private void loadListView(List<Employee> allEmployees)
+    {
+        if(allEmployees.size()<=0)
+        {
+            List<Employee> tmp = new ArrayList<>();
+            tmp.add(new Employee("position", "no Employee", "", "", 0, -1));
+            fillListView(tmp);
+        }
+        fillListView(allEmployees);
     }
 }
