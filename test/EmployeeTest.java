@@ -15,7 +15,7 @@ class EmployeeTest {
     @BeforeEach
     public void initialize()
     {
-        test = new Employee("CEO", "FirstNameTest", "SirNameTest","Marketing",10,null,0);
+        test = new Employee("CEO", "FirstNameTest", "SirNameTest","Marketing",10,0);
         subEmployee = new Employee("Head", "2FirstNameTest", "2SirNameTest","Sales",20,1);
         test.addSubordinate(subEmployee);
     }
@@ -26,7 +26,7 @@ class EmployeeTest {
 
     @Test
     void getDepartment() {
-        assertEquals("Market    ing", test.getDepartment());
+        assertEquals("Marketing", test.getDepartment());
     }
 
     @Test

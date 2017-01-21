@@ -2,10 +2,7 @@ package utils;
 
 import app.Employee;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +55,15 @@ public class CsvFileReader
     {
         File csv = new File(file);
         String fileName = csv.getAbsolutePath();
+
         BufferedReader fileReader = null;
         List<Employee> employees = new ArrayList<>();
         try
         {
             String line = "";
-            fileReader = new BufferedReader(new FileReader(fileName));
-
+            //fileReader = new BufferedReader(new FileReader(fileName));
+            InputStreamReader fileReader2 = new InputStreamReader(getClass().getResourceAsStream("db.csv"));
+            fileReader = new BufferedReader(fileReader2);
             //First pass in the file, loading all the employee into memory.
             while ((line = fileReader.readLine()) != null)
             {
@@ -77,7 +76,8 @@ public class CsvFileReader
             }
 
             //Second pass, make the hierarchical links.
-            fileReader = new BufferedReader(new FileReader(fileName));
+            fileReader2 = new InputStreamReader(getClass().getResourceAsStream("db.csv"));
+            fileReader = new BufferedReader(fileReader2);
             int count = 0;
             while ((line = fileReader.readLine()) != null)
             {
