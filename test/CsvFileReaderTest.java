@@ -2,6 +2,7 @@ import app.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import utils.CsvFileReader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,8 @@ class CsvFileReaderTest {
 
         CsvFileReader testRdr;
         testRdr = new CsvFileReader();
-        String fileNameTest = "D:\\_Perso\\Owncloud\\Cours\\4A\\CompanyHierarchy\\resTest\\testFile.csv";
-        assertEquals(test.getId(), testRdr.readCsvFile(fileNameTest).getId());
+        File csv = new File("resTest/testFile.csv");
+        assertEquals(test.getId(), testRdr.readCsvFile(csv.getAbsolutePath()).getId());
 
     }
 
