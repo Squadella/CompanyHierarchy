@@ -49,6 +49,7 @@ public class MainWindow extends Application
         //Charger les employees
         String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
         _company.loadCompanyFromFile(fileName);
+        _company.generateStats();
         loadListView(_company.getAllEmployee());
         refreshUI();
     }

@@ -18,10 +18,8 @@ public class CsvFileWriter
         try
         {
             fileWriter = new FileWriter(fileName);
-            for(int i = 0; i < Employees.size(); ++i) {
-
-
-
+            for(int i = 0; i < Employees.size(); ++i)
+            {
                 fileWriter.append(String.valueOf(Employees.get(i).getId()));
                 fileWriter.append(DELIMITER);
                 fileWriter.append(Employees.get(i).getSirName());
@@ -34,20 +32,25 @@ public class CsvFileWriter
                 fileWriter.append(DELIMITER);
                 fileWriter.append(String.valueOf(Employees.get(i).getSalary()));
                 fileWriter.append(DELIMITER);
-                if(Employees.get(i).getSupervisor() != null) {
+                if(Employees.get(i).getSupervisor() != null)
+                {
                     fileWriter.append(String.valueOf(Employees.get(i).getSupervisor().getId()));
                 }
                 else
                     fileWriter.append("null");
+
                 fileWriter.append(DELIMITER);
-                if(Employees.get(i).getSubEmployee().size() != 0) {
-                    for (int j = 0; j < Employees.get(i).getSubEmployee().size(); ++j) {
+                if(Employees.get(i).getSubEmployee().size() != 0)
+                {
+                    for (int j = 0; j < Employees.get(i).getSubEmployee().size(); ++j)
+                    {
                         fileWriter.append(String.valueOf(Employees.get(i).getSubEmployee().get(i).getId()));
                         fileWriter.append(DELIMITER2);
                     }
                 }
                 else
                     fileWriter.append("null");
+
                 fileWriter.append(SEPARATOR);
             }
         }

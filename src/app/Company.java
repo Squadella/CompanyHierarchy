@@ -160,4 +160,48 @@ public class Company
     {
         this.CEO = new CsvFileReader().readCsvFile(file);
     }
+
+    public void generateStats()
+    {
+        List<Employee> allEmployee = getAllEmployee();
+
+        //Setting the number of employee.
+        numberOfEmployee=allEmployee.size();
+
+        //Calculating department cost.
+        float[] departmentCost = new float[4]; //same order as the department name.
+        String[] departmentName = {"Accounting", "Sales", "Marketing", "Manufacturing"};
+        for(Employee employee: allEmployee)
+        {
+            for (int i=0; i<4; ++i)
+            {
+                if(employee.getDepartment().equals(departmentName[i]))
+                {
+                    departmentCost[i] += employee.getSalary();
+                    break;
+                }
+            }
+        }
+
+        //Getting the total cost of the company, the most expensive department and the less expensive one.
+        int indexMax=0, indexMin=0;
+        float max=0, min=departmentCost[0];
+        for(int i=0; i<4; ++i)
+        {
+            if(max<departmentCost[i])
+            {
+                indexMax=i;
+                max=departmentCost[i];
+            }
+            if(min>departmentCost[i])
+            {
+                indexMin=i;
+                min=departmentCost[i];
+            }
+            this.totalCost+=departmentCost[i];
+        }
+        mostExpensiveDepartment=departmentName[indexMax];
+        lessExpensiveDepartment=departmentName[indexMin];
+        averageDepartmentCost=totalCost/4;
+    }
 }
