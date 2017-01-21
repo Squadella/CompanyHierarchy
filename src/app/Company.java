@@ -73,7 +73,7 @@ public class Company
         {
             return 0;
         }
-        nextEmployee.addAll(CEO.getSubEmployee());
+        nextEmployee.add(CEO);
         while(nextEmployee.size()>0) {
             if (nextEmployee.get(0).getDepartment().equals(dpt)) {
                 totalSalary+= nextEmployee.get(0).getSalary();
@@ -92,7 +92,7 @@ public class Company
         {
             return 0;
         }
-        nextEmployee.addAll(CEO.getSubEmployee());
+        nextEmployee.add(CEO);
         while(nextEmployee.size()>0) {
             if (nextEmployee.get(0).getDepartment().equals(dpt)) {
                 totalEmployees++;
@@ -109,8 +109,7 @@ public class Company
             return new ArrayList<>();
         List<Employee> allEmployees = new ArrayList<>();
         List<Employee> nextEmployee = new ArrayList<>();
-        allEmployees.add(CEO);
-        nextEmployee.addAll(CEO.getSubEmployee());
+        nextEmployee.add(CEO);
         while(nextEmployee.size()>0)
         {
             allEmployees.add(nextEmployee.get(0));
