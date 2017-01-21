@@ -2,6 +2,7 @@ package utils;
 
 import app.Employee;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +13,10 @@ public class CsvFileWriter
     private static final String DELIMITER2 = ",";
     private static final String SEPARATOR = "\n";
 
-    public static void writeCsvFile(String fileName, List<Employee> Employees)
+    public static void writeCsvFile(String file, List<Employee> Employees)
     {
+        File csv = new File(file);
+        String fileName = csv.getAbsolutePath();
         FileWriter fileWriter = null;
         try
         {

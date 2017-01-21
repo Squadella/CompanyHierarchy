@@ -3,6 +3,7 @@ package utils;
 import app.Employee;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class CsvFileReader
 
     private void setSubordinates(String subFile, List<Employee> employees, Employee currentEmployee)
     {
-        List<Employee> subordinates = new ArrayList<>();
         if(subFile.equals("null"))
             return ;
 
@@ -54,8 +54,10 @@ public class CsvFileReader
         }
     }
 
-    public Employee readCsvFile(String fileName)
+    public Employee readCsvFile(String file)
     {
+        File csv = new File(file);
+        String fileName = csv.getAbsolutePath();
         BufferedReader fileReader = null;
         List<Employee> employees = new ArrayList<>();
         try

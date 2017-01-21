@@ -32,9 +32,9 @@ class CsvFileWriterTest {
     void writeCsvFile(){
         CsvFileWriter test = new CsvFileWriter();
         CsvFileReader testR = new CsvFileReader();
-        File csv = new File("resTest/testFile.csv");
-        test.writeCsvFile(csv.getAbsolutePath(), employees);
-        testC.loadCompanyFromFile(csv.getAbsolutePath());
+        String file = "resTest/testFile.csv";
+        test.writeCsvFile(file, employees);
+        testC.loadCompanyFromFile(file);
         assertEquals(employees.size(), testC.getAllEmployee().size());
     }
 
