@@ -138,9 +138,9 @@ public class Employee
     public Employee getEmployeeByID(int id, Employee startEmployee)
     {
         List<Employee> nextEmployees = new ArrayList<>();
-        nextEmployees.addAll(startEmployee.getSubEmployee());
+        nextEmployees.add(startEmployee);
         //Browse all employee from the startEmployee.
-        while(nextEmployees.size()<0)
+        while(nextEmployees.size()>0)
         {
             if(nextEmployees.get(0).getId()==id)
                 return nextEmployees.get(0);

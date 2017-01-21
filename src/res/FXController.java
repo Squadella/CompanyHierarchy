@@ -16,6 +16,7 @@ import java.util.List;
 public class FXController {
 
     private Company company;
+    private Employee lastSelectedEmployee;
 
     @FXML private ListView<Employee> listViewEmployee;
 
@@ -90,17 +91,31 @@ public class FXController {
 
     public void addEmployee()
     {
-        System.out.print("Add");
+        //company.addEmployee("test", "test1", "test2", "test3", 1f, company.getCEO());
+        refreshUI();
+        loadListView(company.getAllEmployee());
     }
 
     public void removeEmployee()
     {
-        System.out.print("Remove");
+        //Get employee
+        if(lastSelectedEmployee==null)
+        {
+            return;
+        }
+        lastSelectedEmployee.removeEmployee();
+        refreshEmployee(company.getCEO());
+        refreshUI();
+        loadListView(company.getAllEmployee());
     }
 
     public void moveEmployee()
     {
-        System.out.print("Move");
+        List<Employee> tmp =new ArrayList<>();
+        tmp.add(company.getEmployeeByID(17));
+        //company.moveEmployee(company.getCEO(), lastSelectedEmployee, tmp);
+        refreshUI();
+        loadListView(company.getAllEmployee());
     }
 
     public void loadUI()
@@ -109,6 +124,8 @@ public class FXController {
         company = new Company();
         String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
         //String fileName="/home/messmaker/Documents/Programming/Java/CompanyHierarchy/src/res/db.csv";
+
+
         company.loadCompanyFromFile(fileName);
         company.generateStats();
         loadListView(company.getAllEmployee());
@@ -141,6 +158,7 @@ public class FXController {
 
     public void refreshEmployee(Employee employee)
     {
+        lastSelectedEmployee = employee;
         setTextEmployeeFirstName(employee.getFirstName());
         setTextEmployeeLastName(employee.getSirName());
         setTextEmployeeDpt(employee.getDepartment());

@@ -38,6 +38,8 @@ public class Company
                 System.exit(-1);
             }
         }
+
+        //Removing the node in previous poistion
         for(int i = 0; i < employee.getSubEmployee().size(); ++i)
         {
             //Setting supervisor
@@ -45,14 +47,22 @@ public class Company
             //Setting subordinate
             employee.getSupervisor().addSubordinate(employee.getSubEmployee().get(i));
         }
+
+        //Adding links in new position
         employee.removeAllSubordinate();
         employee.addSubordinate(subordinates);
         employee.setNewSupervisor(supervisor);
+
+        //changing neighbors
+        employee.getSupervisor().addSubordinate(employee);
+        for(Employee neighboor: employee.getSubEmployee())
+        {
+            neighboor.setNewSupervisor(employee);
+        }
     }
 
     public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
     {
-        //TODO: find a way to be place at the superior level
         if(supervisor==null)
         {
             //Top tree
@@ -121,7 +131,7 @@ public class Company
 
     public Employee getEmployeeByID(int id)
     {
-        return null;
+        return CEO.getEmployeeByID(id, CEO);
     }
 
     public float getTotalCost()
