@@ -164,11 +164,7 @@ public class FXController {
             return null;
         });
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
-
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-        });
+        dialog.showAndWait();
     }
 
     public void removeEmployee()
