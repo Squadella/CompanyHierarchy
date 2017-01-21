@@ -151,9 +151,9 @@ public class FXController {
 
             @Override
             public void handle(Event event) {
-                ObservableList<String> selectedItems = subordonates.getSelectionModel().getSelectedItems();
+                ObservableList<Employee> selectedItems = subordonates.getSelectionModel().getSelectedItems();
 
-                for(String s : selectedItems){
+                for(Employee s : selectedItems){
                     System.out.println("selected item " + s);
                 }
 
