@@ -34,9 +34,9 @@
         </Label>
             <Pane layoutY="-2.0" prefHeight="485.0" prefWidth="139.0">
                <children>
-                  <Button layoutX="12.5" layoutY="12.5" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Hire employee" />
-                  <Button layoutX="12.5" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Fire employee" />
-                  <Button layoutX="12.5" layoutY="87.5" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Move employee" />
+                  <Button layoutX="12.5" layoutY="12.5" mnemonicParsing="false" onAction="#addEmployee" prefHeight="25.0" prefWidth="125.0" text="Hire employee" />
+                  <Button layoutX="12.5" layoutY="50.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="25.0" prefWidth="125.0" text="Fire employee" />
+                  <Button layoutX="12.5" layoutY="87.5" mnemonicParsing="false" onAction="#moveEmployee" prefHeight="25.0" prefWidth="125.0" text="Move employee" />
                </children>
             </Pane>
             <Pane layoutX="148.0" prefHeight="485.0" prefWidth="357.0">

@@ -83,4 +83,19 @@ public class FXController {
     {
         return listViewEmployee;
     }
+
+    public void addEmployee()
+    {
+        System.out.print("Add");
+    }
+
+    public void removeEmployee()
+    {
+        System.out.print("Remove");
+    }
+
+    public void moveEmployee()
+    {
+        System.out.print("Move");
+    }
 }
