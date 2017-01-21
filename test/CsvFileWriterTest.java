@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import utils.CsvFileReader;
 import utils.CsvFileWriter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +32,9 @@ class CsvFileWriterTest {
     void writeCsvFile(){
         CsvFileWriter test = new CsvFileWriter();
         CsvFileReader testR = new CsvFileReader();
-        String fileName = "D:\\_Perso\\Owncloud\\Cours\\4A\\CompanyHierarchy\\resTest\\testFile.csv";
-        test.writeCsvFile(fileName, employees);
-        testC.loadCompanyFromFile(fileName);
-        Employee boss = testR.readCsvFile(fileName);
+        String file = "resTest/testFile.csv";
+        test.writeCsvFile(file, employees);
+        testC.loadCompanyFromFile(file);
         assertEquals(employees.size(), testC.getAllEmployee().size());
     }
 
