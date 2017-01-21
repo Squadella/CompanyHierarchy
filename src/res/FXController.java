@@ -2,16 +2,25 @@ package res;
 
 import app.Company;
 import app.Employee;
+import app.MainWindow;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FXController {
 
@@ -91,9 +100,75 @@ public class FXController {
 
     public void addEmployee()
     {
-        //company.addEmployee("test", "test1", "test2", "test3", 1f, company.getCEO());
+        dialog();
         refreshUI();
         loadListView(company.getAllEmployee());
+    }
+
+    public void dialog()
+    {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Hire an employee");
+        ButtonType buttonTypeHire = new ButtonType("Hire", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(buttonTypeHire, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+
+        TextField firstName = new TextField();
+        TextField lastName = new TextField();
+        TextField department = new TextField();
+        TextField position = new TextField();
+        TextField salary = new TextField();
+        ListView<Employee> superior = new ListView<>();
+        ListView<Employee> subordonates = new ListView<>();
+
+        superior.setMaxHeight(200);
+        subordonates.setMaxHeight(200);
+
+        grid.add(new Label("First name :"), 0, 0);
+        grid.add(firstName, 1, 0);
+        grid.add(new Label("Last name :"), 0, 1);
+        grid.add(lastName, 1, 1);
+        grid.add(new Label("Department :"), 0, 2);
+        grid.add(department, 1, 2);
+        grid.add(new Label("Position :"), 0, 3);
+        grid.add(position, 1, 3);
+        grid.add(new Label("Salary :"), 0, 4);
+        grid.add(salary, 1, 4);
+        grid.add(new Label("Superior :"), 0, 5);
+        grid.add(superior, 1, 5);
+        grid.add(new Label("Subordonates :"), 0, 6);
+        grid.add(subordonates, 1, 6);
+
+        if(company.getAllEmployee().size()<=0)
+        {
+            List<Employee> tmp = new ArrayList<>();
+            tmp.add(new Employee("position", "no Employee", "", "", 0, -1));
+            superior.setItems(FXCollections.observableArrayList(tmp));
+            subordonates.setItems(FXCollections.observableArrayList(tmp));
+        }
+        superior.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+        subordonates.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+
+        dialog.getDialogPane().setContent(grid);
+
+// Convert the result to a username-password-pair when the login button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeHire) {
+                company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()));
+                dialog.close();
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+
+        result.ifPresent(usernamePassword -> {
+            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+        });
     }
 
     public void removeEmployee()
@@ -122,9 +197,8 @@ public class FXController {
     {
         //Charger les employees
         company = new Company();
-        String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
-        //String fileName="/home/messmaker/Documents/Programming/Java/CompanyHierarchy/src/res/db.csv";
-
+        //String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
+        String fileName="/home/messmaker/Documents/Programming/Java/CompanyHierarchy/src/res/db.csv";
 
         company.loadCompanyFromFile(fileName);
         company.generateStats();
