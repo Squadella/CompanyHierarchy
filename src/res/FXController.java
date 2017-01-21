@@ -193,10 +193,7 @@ public class FXController {
     {
         //Charger les employees
         company = new Company();
-        //String fileName="D:\\Documents\\GitHub\\CompanyHierarchy\\src\\res\\db.csv";
-        String fileName="/home/messmaker/Documents/Programming/Java/CompanyHierarchy/src/res/db.csv";
-
-        company.loadCompanyFromFile(fileName);
+        company.loadCompanyFromFile("src/res/db.csv");
         company.generateStats();
         loadListView(company.getAllEmployee());
         refreshUI();
