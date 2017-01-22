@@ -1,8 +1,10 @@
 package utils;
 
 import app.Employee;
+import app.MainWindow;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,64 +53,71 @@ public class CsvFileReader
         }
     }
 
-    public Employee readCsvFile(String file)
+    public Employee readCsvFile()
     {
-        File csv = new File(file);
-        String fileName = csv.getAbsolutePath();
-
-        BufferedReader fileReader = null;
-        List<Employee> employees = new ArrayList<>();
         try
         {
-            String line = "";
-            //fileReader = new BufferedReader(new FileReader(fileName));
-            InputStreamReader fileReader2 = new InputStreamReader(getClass().getResourceAsStream("db.csv"));
-            fileReader = new BufferedReader(fileReader2);
-            //First pass in the file, loading all the employee into memory.
-            while ((line = fileReader.readLine()) != null)
+            //Getting the path of the jar file.
+            URL csv = getClass().getResource("/db.csv");
+            File csvFile = new File(csv.getPath());
+            BufferedReader fileReader = null;
+            List<Employee> employees = new ArrayList<>();
+            try
             {
-                String[] tokens = line.split(DELIMITER);
-                if (tokens.length > 0)
-                {
-                    Employee employee = new Employee(tokens[POSITION], tokens[FIRST_NAME], tokens[SIR_NAME], tokens[DEPARTMENT], Float.parseFloat(tokens[SALARY]),Integer.parseInt(tokens[ID]));
-                    employees.add(employee);
-                }
-            }
+                String line = "";
+                fileReader = new BufferedReader(new FileReader(csvFile));
 
-            //Second pass, make the hierarchical links.
-            fileReader2 = new InputStreamReader(getClass().getResourceAsStream("db.csv"));
-            fileReader = new BufferedReader(fileReader2);
-            int count = 0;
-            while ((line = fileReader.readLine()) != null)
-            {
-                String[] tokens = line.split(DELIMITER);
-                if (tokens.length > 0)
+                //First pass in the file, loading all the employee into memory.
+                while ((line = fileReader.readLine()) != null)
                 {
-                    if(!tokens[SUBORDINATES].equals("null"))
-                        setSubordinates(tokens[SUBORDINATES], employees, employees.get(count));
-                    if(!tokens[SUPERVISOR].equals("null"))
-                        setSupervisor(tokens[SUPERVISOR], employees, employees.get(count));
+                    String[] tokens = line.split(DELIMITER);
+                    if (tokens.length > 0)
+                    {
+                        Employee employee = new Employee(tokens[POSITION], tokens[FIRST_NAME], tokens[SIR_NAME], tokens[DEPARTMENT], Float.parseFloat(tokens[SALARY]),Integer.parseInt(tokens[ID]));
+                        employees.add(employee);
+                    }
                 }
-                count++;
+
+                //Second pass, make the hierarchical links.
+                fileReader = new BufferedReader(new FileReader(csvFile));
+                int count = 0;
+                while ((line = fileReader.readLine()) != null)
+                {
+                    String[] tokens = line.split(DELIMITER);
+                    if (tokens.length > 0)
+                    {
+                        if(!tokens[SUBORDINATES].equals("null"))
+                            setSubordinates(tokens[SUBORDINATES], employees, employees.get(count));
+                        if(!tokens[SUPERVISOR].equals("null"))
+                            setSupervisor(tokens[SUPERVISOR], employees, employees.get(count));
+                    }
+                    count++;
+                }
             }
+            catch (Exception e)
+            {
+                System.out.println("Error in utils.CsvFileReader !!!");
+                e.printStackTrace();
+            }
+            finally
+            {
+                try
+                {
+                    fileReader.close();
+                }
+                catch (IOException e)
+                {
+                    System.out.println("Error while closing fileReader !!!");
+                    e.printStackTrace();
+                }
+            }
+            return employees.get(0);
         }
         catch (Exception e)
         {
-            System.out.println("Error in utils.CsvFileReader !!!");
-            e.printStackTrace();
+            //TODO: create the csv file.
+            System.out.println("fail");
         }
-        finally
-        {
-            try
-            {
-                fileReader.close();
-            }
-            catch (IOException e)
-            {
-                System.out.println("Error while closing fileReader !!!");
-                e.printStackTrace();
-            }
-        }
-        return employees.get(0);
+        return null;
     }
 }

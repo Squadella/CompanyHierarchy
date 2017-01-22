@@ -167,7 +167,7 @@ public class Company
 
     public void loadCompanyFromFile(String file)
     {
-        this.CEO = new CsvFileReader().readCsvFile(file);
+        this.CEO = new CsvFileReader().readCsvFile();
     }
 
     public void generateStats()
