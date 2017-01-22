@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Company
 {
-    private int lastID; //txt the lastID will be written at the end
+    private int lastID;
     private Employee CEO;
     private float totalCost;
     private float averageDepartmentCost;
@@ -70,24 +70,8 @@ public class Company
         }
         else
         {
-            ++lastID;
+            lastID++;
             supervisor.addSubordinate(new Employee(position, firstName, sirName, department, salary, supervisor, lastID));
-        }
-    }
-
-    public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, List<Employee> subordicock)
-    {
-        if(supervisor==null)
-        {
-            //Top tree
-            this.CEO = new Employee(position, firstName, sirName, department, salary, null, lastID);
-        }
-        else
-        {
-            ++lastID;
-            Employee tmp = new Employee(position, firstName, sirName, department, salary, supervisor, lastID);
-            tmp.addSubordinate(subordicock);
-            supervisor.addSubordinate(tmp);
         }
     }
 
@@ -251,6 +235,18 @@ public class Company
         {
             employee.removeEmployee();
             return "OK";
+        }
+    }
+
+    public void searchLastID()
+    {
+        List<Employee> employees = getAllEmployee();
+        for(Employee employee:employees)
+        {
+            if(employee.getId()>lastID)
+            {
+                lastID=employee.getId();
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import utils.CsvFileWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,7 @@ public class FXController {
         dialog();
         refreshUI();
         loadListView(company.getAllEmployee());
+        new CsvFileWriter().writeCsvFile(company.getAllEmployee());
     }
 
     public void dialog()
@@ -199,6 +201,7 @@ public class FXController {
         company = new Company();
         company.loadCompanyFromFile("src/res/db.csv");
         company.generateStats();
+        company.searchLastID();
         loadListView(company.getAllEmployee());
         refreshUI();
     }

@@ -28,7 +28,6 @@ class CsvFileReaderTest {
 
         CsvFileReader testRdr;
         testRdr = new CsvFileReader();
-        String file = "resTest/testFile.csv";
         assertEquals(test.getId(), testRdr.readCsvFile().getId());
 
     }
