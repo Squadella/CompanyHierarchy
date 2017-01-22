@@ -188,7 +188,6 @@ public class FXController {
         }
         refreshEmployee(company.getCEO());
         refreshUI();
-        loadListView(company.getAllEmployee());
     }
 
     public void moveEmployee()
@@ -204,15 +203,15 @@ public class FXController {
     {
         //Charger les employees
         company = new Company();
-        company.loadCompanyFromFile("src/res/db.csv");
-        company.generateStats();
-        loadListView(company.getAllEmployee());
+        company.loadCompanyFromFile();
         refreshUI();
     }
 
     //Refresh everything in UI except app.Employee frame
     private void refreshUI()
     {
+        company.generateStats();
+        loadListView(company.getAllEmployee());
         setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
         setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
         setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());

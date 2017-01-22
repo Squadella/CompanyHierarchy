@@ -34,7 +34,7 @@ class CsvFileWriterTest {
         CsvFileReader testR = new CsvFileReader();
         String file = "resTest/testFile.csv";
         test.writeCsvFile(file, employees);
-        testC.loadCompanyFromFile(file);
+        testC.loadCompanyFromFile();
         assertEquals(employees.size(), testC.getAllEmployee().size());
     }
 

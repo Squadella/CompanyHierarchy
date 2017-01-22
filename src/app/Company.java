@@ -181,7 +181,7 @@ public class Company
         return CEO;
     }
 
-    public void loadCompanyFromFile(String file)
+    public void loadCompanyFromFile()
     {
         this.CEO = new CsvFileReader().readCsvFile();
     }
