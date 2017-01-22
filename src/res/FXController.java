@@ -107,7 +107,6 @@ public class FXController {
         dialog();
         refreshUI();
         loadListView(company.getAllEmployee());
-        new CsvFileWriter().writeCsvFile(company.getAllEmployee());
     }
 
     public void dialog()
@@ -160,11 +159,14 @@ public class FXController {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == buttonTypeHire) {
-                if(company.getAllEmployee().size()>0)
-                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()));
-                else
-                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), null);
                 dialog.close();
+                if(company.getAllEmployee().size()>0)
+                {
+                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(company.getAllEmployee().get(superior.getSelectionModel().getSelectedIndex()).getId()), subordonates.getSelectionModel().getSelectedItems());
+                }
+                else {
+                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), null);
+                }
             }
             return null;
         });
@@ -179,11 +181,16 @@ public class FXController {
         {
             return;
         }
-        //TODO: put the return string into dialog if error.
-        System.out.println(company.removeEmployee(lastSelectedEmployee));
+        if(!Objects.equals(company.removeEmployee(lastSelectedEmployee), "OK"))
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Can't destroy CEO if he has more than one subordinate");
+
+            alert.showAndWait();
+        }
         refreshEmployee(company.getCEO());
         refreshUI();
-        loadListView(company.getAllEmployee());
     }
 
     public void moveEmployee()
@@ -199,16 +206,17 @@ public class FXController {
     {
         //Charger les employees
         company = new Company();
-        company.loadCompanyFromFile("src/res/db.csv");
-        company.generateStats();
+        company.loadCompanyFromFile();
         company.searchLastID();
-        loadListView(company.getAllEmployee());
         refreshUI();
     }
 
     //Refresh everything in UI except app.Employee frame
     private void refreshUI()
     {
+        company.generateStats();
+        loadListView(company.getAllEmployee());
+        //new CsvFileWriter().writeCsvFile(company.getAllEmployee());
         setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
         setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
         setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());
