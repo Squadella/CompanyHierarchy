@@ -154,6 +154,7 @@ public class FXController {
                 ObservableList<Employee> selectedItems = subordonates.getSelectionModel().getSelectedItems();
 
                 for(Employee s : selectedItems){
+
                     System.out.println("selected item " + s);
                 }
 
@@ -173,10 +174,12 @@ public class FXController {
 
         dialog.getDialogPane().setContent(grid);
 
-// Convert the result to a username-password-pair when the login button is clicked.
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == buttonTypeHire) {
-                company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()));
+            if (dialogButton == buttonTypeHire)
+            {
+                List<Employee> tmp = subordonates.getSelectionModel().getSelectedItems();
+
+                company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()), tmp);
                 dialog.close();
             }
             return null;

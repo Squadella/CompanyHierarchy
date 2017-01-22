@@ -75,6 +75,22 @@ public class Company
         }
     }
 
+    public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, List<Employee> subordicock)
+    {
+        if(supervisor==null)
+        {
+            //Top tree
+            this.CEO = new Employee(position, firstName, sirName, department, salary, null, lastID);
+        }
+        else
+        {
+            ++lastID;
+            Employee tmp = new Employee(position, firstName, sirName, department, salary, supervisor, lastID);
+            tmp.addSubordinate(subordicock);
+            supervisor.addSubordinate(tmp);
+        }
+    }
+
     public float getDptExpenses(String dpt)
     {
         float totalSalary = 0;
