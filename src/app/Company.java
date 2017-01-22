@@ -66,7 +66,7 @@ public class Company
         if(supervisor==null)
         {
             //Top tree
-            this.CEO = new Employee(position, firstName, sirName, department, salary, null, lastID);
+            this.CEO = new Employee(position, firstName, sirName, department, salary, lastID);
         }
         else
         {
@@ -183,7 +183,7 @@ public class Company
 
     public void loadCompanyFromFile(String file)
     {
-        this.CEO = new CsvFileReader().readCsvFile(file);
+        this.CEO = new CsvFileReader().readCsvFile();
     }
 
     public void generateStats()

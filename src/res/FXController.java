@@ -142,44 +142,26 @@ public class FXController {
         grid.add(position, 1, 3);
         grid.add(new Label("Salary :"), 0, 4);
         grid.add(salary, 1, 4);
-        grid.add(new Label("Superior :"), 0, 5);
-        grid.add(superior, 1, 5);
-        grid.add(new Label("Subordonates :"), 0, 6);
-        grid.add(subordonates, 1, 6);
 
-        subordonates.setOnMouseClicked(new EventHandler<Event>() {
-
-            @Override
-            public void handle(Event event) {
-                ObservableList<Employee> selectedItems = subordonates.getSelectionModel().getSelectedItems();
-
-                for(Employee s : selectedItems){
-
-                    System.out.println("selected item " + s);
-                }
-
-            }
-
-        });
-
-        if(company.getAllEmployee().size()<=0)
+        if(company.getAllEmployee().size()>0)
         {
-            List<Employee> tmp = new ArrayList<>();
-            tmp.add(new Employee("position", "no Employee", "", "", 0, -1));
-            superior.setItems(FXCollections.observableArrayList(tmp));
-            subordonates.setItems(FXCollections.observableArrayList(tmp));
+            grid.add(new Label("Superior :"), 0, 5);
+            grid.add(superior, 1, 5);
+            grid.add(new Label("Subordinates :"), 0, 6);
+            grid.add(subordonates, 1, 6);
+            superior.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+            subordonates.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
         }
-        superior.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
-        subordonates.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == buttonTypeHire)
-            {
-                List<Employee> tmp = subordonates.getSelectionModel().getSelectedItems();
-
-                company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()), tmp);
+            if (dialogButton == buttonTypeHire) {
+                if(company.getAllEmployee().size()>0)
+                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()));
+                else
+                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), null);
                 dialog.close();
             }
             return null;
