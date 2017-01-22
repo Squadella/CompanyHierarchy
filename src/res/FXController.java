@@ -195,7 +195,8 @@ public class FXController {
         {
             return;
         }
-        lastSelectedEmployee.removeEmployee();
+        //TODO: put the return string into dialog if error.
+        System.out.println(company.removeEmployee(lastSelectedEmployee));
         refreshEmployee(company.getCEO());
         refreshUI();
         loadListView(company.getAllEmployee());

@@ -229,4 +229,28 @@ public class Company
         lessExpensiveDepartment=departmentName[indexMin];
         averageDepartmentCost=totalCost/4;
     }
+
+    public String removeEmployee(Employee employee)
+    {
+        if(employee.getPosition().equals("CEO"))
+        {
+            if( CEO.getSubEmployee().size()==1)
+            {
+                Employee tmp = CEO.getSubEmployee().get(0);
+                tmp.setNoSupervisor();
+                CEO.removeAllSubordinate();
+                CEO = tmp;
+                return "OK";
+            }
+            else
+            {
+                return "Can't destroy CEO if he has more than one subordinate";
+            }
+        }
+        else
+        {
+            employee.removeEmployee();
+            return "OK";
+        }
+    }
 }

@@ -159,4 +159,10 @@ public class Employee
     {
         return depth;
     }
+
+    public void setNoSupervisor()
+    {
+        supervisor=null;
+        depth=0;
+    }
 }
