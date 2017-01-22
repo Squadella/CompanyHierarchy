@@ -83,13 +83,14 @@ public class Company
         tmp.addSubordinate(subordinates);
         for(Employee subordinate: subordinates)
         {
+            subordinate.setNewSupervisor(tmp);
             //search if superior has the same subordinate and remove it if needed.
             for(Employee superiorSubordinate: supervisor.getSubEmployee())
             {
-                if(superiorSubordinate.getId() == subordinate.getId())
+                if(superiorSubordinate.getId() == subordinate.getId()) {
                     supervisor.removeSubordinate(subordinate);
+                }
             }
-            subordinate.setNewSupervisor(tmp);
         }
     }
 
@@ -183,7 +184,7 @@ public class Company
         return CEO;
     }
 
-    public void loadCompanyFromFile(String file)
+    public void loadCompanyFromFile()
     {
         this.CEO = new CsvFileReader().readCsvFile();
     }

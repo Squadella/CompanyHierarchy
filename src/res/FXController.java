@@ -24,6 +24,7 @@ import utils.CsvFileWriter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class FXController {
@@ -216,7 +217,7 @@ public class FXController {
     {
         company.generateStats();
         loadListView(company.getAllEmployee());
-        //new CsvFileWriter().writeCsvFile(company.getAllEmployee());
+        new CsvFileWriter().writeCsvFile(company.getAllEmployee());
         setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
         setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
         setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());
