@@ -116,7 +116,17 @@ public class CsvFileReader
         catch (Exception e)
         {
             //TODO: create the csv file.
-            System.out.println("fail");
+
+            try
+            {
+                System.out.println("fail");
+                File csvFile = new File("db.csv");
+                csvFile.createNewFile();
+            }
+            catch (Exception ex)
+            {
+                System.out.println("Epicfail");
+            }
         }
         return null;
     }
