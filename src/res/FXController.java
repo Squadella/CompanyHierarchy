@@ -23,6 +23,7 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class FXController {
@@ -177,8 +178,14 @@ public class FXController {
         {
             return;
         }
-        //TODO: put the return string into dialog if error.
-        System.out.println(company.removeEmployee(lastSelectedEmployee));
+        if(!Objects.equals(company.removeEmployee(lastSelectedEmployee), "OK"))
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Can't destroy CEO if he has more than one subordinate");
+
+            alert.showAndWait();
+        }
         refreshEmployee(company.getCEO());
         refreshUI();
         loadListView(company.getAllEmployee());
