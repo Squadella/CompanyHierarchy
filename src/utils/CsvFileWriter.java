@@ -5,6 +5,7 @@ import app.Employee;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 
@@ -21,6 +22,17 @@ public class CsvFileWriter
         File csvFile = new File(csv.getPath());
         String fileName = csvFile.getAbsolutePath();
         FileWriter fileWriter = null;
+        //Empty the file
+        try
+        {
+            PrintWriter writer = new PrintWriter(csvFile);
+            writer.print("");
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Fail to empty file!");
+        }
         try
         {
             fileWriter = new FileWriter(fileName);

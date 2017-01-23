@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Employee
 {
@@ -23,7 +24,7 @@ public class Employee
         this.position = position;
         this.firstName = firstName;
         this.sirName = sirName;
-        this.subordinates = new ArrayList<>();
+        this.subordinates = new CopyOnWriteArrayList<>();
         this.supervisor = null;
         this.depth = 0;
     }
@@ -36,7 +37,7 @@ public class Employee
         this.department = department;
         this.salary = salary;
         this.supervisor = supervisor;
-        this.subordinates = new ArrayList<>();
+        this.subordinates = new CopyOnWriteArrayList<>();
         this.id = id;
         this.depth = supervisor.getDepth() + 1;
     }
@@ -103,7 +104,7 @@ public class Employee
 
     public void removeAllSubordinate()
     {
-        this.subordinates=new ArrayList<>();
+        this.subordinates=new CopyOnWriteArrayList<>();
     }
 
     public void removeSubordinate(Employee subordinate)

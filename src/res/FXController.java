@@ -161,8 +161,8 @@ public class FXController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == buttonTypeHire) {
                 if(company.getAllEmployee().size()>0)
-                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(superior.getSelectionModel().getSelectedIndex()));
-                else
+                    company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getEmployeeByID(company.getAllEmployee().get(superior.getSelectionModel().getSelectedIndex()).getId()), subordonates.getSelectionModel().getSelectedItems());
+                else 
                     company.addEmployee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), null);
                 dialog.close();
             }
@@ -205,6 +205,7 @@ public class FXController {
         //Charger les employees
         company = new Company();
         company.loadCompanyFromFile();
+        company.searchLastID();
         refreshUI();
     }
 

@@ -75,6 +75,25 @@ public class Company
         }
     }
 
+    public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, List<Employee> subordinates)
+    {
+        lastID++;
+        Employee tmp = new Employee(position, firstName, sirName, department, salary, supervisor, lastID);
+        supervisor.addSubordinate(tmp);
+        tmp.addSubordinate(subordinates);
+        for(Employee subordinate: subordinates)
+        {
+            subordinate.setNewSupervisor(tmp);
+            //search if superior has the same subordinate and remove it if needed.
+            for(Employee superiorSubordinate: supervisor.getSubEmployee())
+            {
+                if(superiorSubordinate.getId() == subordinate.getId()) {
+                    supervisor.removeSubordinate(subordinate);
+                }
+            }
+        }
+    }
+
     public float getDptExpenses(String dpt)
     {
         float totalSalary = 0;
