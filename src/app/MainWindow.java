@@ -39,7 +39,12 @@ public class MainWindow extends Application
         controller.loadUI();
 
         controller.getListViewEmployee().getSelectionModel().selectedItemProperty().addListener((observable, oldValue, id) -> {
-            controller.refreshEmployee(observable.getValue());
+            if(observable.getValue()!=null)
+                controller.refreshEmployee(observable.getValue());
+            else
+            {
+                controller.refreshUI();
+            }
         });
     }
 }

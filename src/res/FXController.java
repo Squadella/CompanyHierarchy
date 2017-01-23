@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FXController {
 
@@ -172,6 +173,71 @@ public class FXController {
         dialog.showAndWait();
     }
 
+    public void editDialog()
+    {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Edit an employee");
+        ButtonType buttonTypeHire = new ButtonType("Edit", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(buttonTypeHire, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+
+        TextField firstName = new TextField();
+        TextField lastName = new TextField();
+        TextField department = new TextField();
+        TextField position = new TextField();
+        TextField salary = new TextField();
+        ListView<Employee> superior = new ListView<>();
+        ListView<Employee> subordonates = new ListView<>();
+
+        superior.setMaxHeight(200);
+        subordonates.setMaxHeight(200);
+        subordonates.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        grid.add(new Label("First name :"), 0, 0);
+        grid.add(firstName, 1, 0);
+        grid.add(new Label("Last name :"), 0, 1);
+        grid.add(lastName, 1, 1);
+        grid.add(new Label("Department :"), 0, 2);
+        grid.add(department, 1, 2);
+        grid.add(new Label("Position :"), 0, 3);
+        grid.add(position, 1, 3);
+        grid.add(new Label("Salary :"), 0, 4);
+        grid.add(salary, 1, 4);
+        grid.add(new Label("Change superior :"), 0, 5);
+        grid.add(superior, 1, 5);
+        grid.add(new Label("Change subordinates :"), 0, 6);
+        grid.add(subordonates, 1, 6);
+        superior.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+        subordonates.setItems(FXCollections.observableArrayList(company.getAllEmployee()));
+
+        firstName.setText(lastSelectedEmployee.getFirstName());
+        lastName.setText(lastSelectedEmployee.getSirName());
+        department.setText(lastSelectedEmployee.getDepartment());
+        position.setText(lastSelectedEmployee.getPosition());
+        salary.setText(Float.toString(lastSelectedEmployee.getSalary()));
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeHire)
+            {
+                //System.out.println(superior.getSelectionModel().getSelectedIndex());
+                if(superior.getSelectionModel().getSelectedIndex()!=-1)
+                    company.moveEmployee(company.getEmployeeByID(company.getAllEmployee().get(superior.getSelectionModel().getSelectedIndex()).getId()), lastSelectedEmployee, subordonates.getSelectionModel().getSelectedItems(), new Employee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getLastID()));
+                else
+                    company.moveEmployee(null, lastSelectedEmployee, subordonates.getSelectionModel().getSelectedItems(), new Employee(position.getText(), firstName.getText(), lastName.getText(), department.getText(), Float.parseFloat(salary.getText()), company.getLastID()));
+                dialog.close();
+            }
+            return null;
+        });
+
+        dialog.showAndWait();
+    }
+
     public void removeEmployee()
     {
         //Get employee
@@ -193,11 +259,8 @@ public class FXController {
 
     public void moveEmployee()
     {
-        List<Employee> tmp =new ArrayList<>();
-        tmp.add(company.getEmployeeByID(17));
-        //company.moveEmployee(company.getCEO(), lastSelectedEmployee, tmp);
+        editDialog();
         refreshUI();
-        loadListView(company.getAllEmployee());
     }
 
     public void loadUI()
@@ -210,11 +273,13 @@ public class FXController {
     }
 
     //Refresh everything in UI except app.Employee frame
-    private void refreshUI()
+    public void refreshUI()
     {
+        if(listViewEmployee.getItems().size()>0)
+            listViewEmployee.getItems().clear();
         company.generateStats();
         loadListView(company.getAllEmployee());
-        new CsvFileWriter().writeCsvFile(company.getAllEmployee());
+        //new CsvFileWriter().writeCsvFile(company.getAllEmployee());
         setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
         setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
         setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());
@@ -268,7 +333,7 @@ public class FXController {
     {
         if(allEmployees.size()<=0)
         {
-            List<Employee> tmp = new ArrayList<>();
+            List<Employee> tmp = new CopyOnWriteArrayList<>();
             tmp.add(new Employee("position", "no Employee", "", "", 0, -1));
             fillListView(tmp);
         }

@@ -166,4 +166,13 @@ public class Employee
         supervisor=null;
         depth=0;
     }
+
+    public void resetInformations( Employee tmp)
+    {
+        this.department=tmp.getDepartment();
+        this.firstName=tmp.getFirstName();
+        this.sirName=tmp.getSirName();
+        this.salary=tmp.getSalary();
+        this.position=tmp.getPosition();
+    }
 }

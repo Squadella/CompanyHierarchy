@@ -27,8 +27,20 @@ public class Company
         lastID = 0;
     }
 
-    public void moveEmployee(Employee supervisor, Employee employee, List<Employee> subordinates)
+    public void moveEmployee(Employee supervisor, Employee employee, List<Employee> subordinates, Employee newEmployee)
     {
+        //Anti-troll system
+        if(supervisor!=null && employee.getId() == supervisor.getId())
+        {
+            return;
+        }
+        for(Employee checkDat : newEmployee.getSubEmployee())
+        {
+            if(checkDat.getId() == employee.getId())
+            {
+                return;
+            }
+        }
         //Anti-loop system.
         for(int i = 0; i < employee.getSubEmployee().size(); ++i)
         {
@@ -39,26 +51,36 @@ public class Company
             }
         }
 
-        //Removing the node in previous poistion
-        for(int i = 0; i < employee.getSubEmployee().size(); ++i)
+        employee.resetInformations(newEmployee);
+
+        if(supervisor != null)
         {
-            //Setting supervisor
-            employee.getSubEmployee().get(i).setNewSupervisor(employee.getSupervisor());
-            //Setting subordinate
-            employee.getSupervisor().addSubordinate(employee.getSubEmployee().get(i));
+            employee.getSupervisor().removeSubordinate(employee);
+            employee.setNewSupervisor(supervisor);
+
+            //changing neighbors
+            employee.getSupervisor().addSubordinate(employee);
         }
-
-        //Adding links in new position
-        employee.removeAllSubordinate();
-        employee.addSubordinate(subordinates);
-        employee.setNewSupervisor(supervisor);
-
-        //changing neighbors
-        employee.getSupervisor().addSubordinate(employee);
-        for(Employee neighboor: employee.getSubEmployee())
+        for (Employee neighboor : employee.getSubEmployee())
         {
             neighboor.setNewSupervisor(employee);
         }
+
+        //Managing subordinates
+        if(subordinates.size()>0)
+        {
+            //Adding links in new position
+            employee.removeAllSubordinate();
+            employee.addSubordinate(subordinates);
+            //Removing the node in previous poistion
+            for (int i = 0; i < employee.getSubEmployee().size(); ++i) {
+                //Setting supervisor
+                employee.getSubEmployee().get(i).setNewSupervisor(employee);
+                employee.getSupervisor().removeSubordinate(employee.getSubEmployee().get(i));
+            }
+
+        }
+
     }
 
     public void addEmployee(String position, String firstName, String sirName, String department, float salary, Employee supervisor)
@@ -267,5 +289,11 @@ public class Company
                 lastID=employee.getId();
             }
         }
+    }
+
+    public int getLastID()
+    {
+        lastID++;
+        return lastID;
     }
 }
