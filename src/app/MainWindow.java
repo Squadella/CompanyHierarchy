@@ -7,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import res.FXController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainWindow extends Application
 {
     private FXController controller;

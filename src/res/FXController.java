@@ -2,30 +2,18 @@ package res;
 
 import app.Company;
 import app.Employee;
-import app.MainWindow;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Pair;
-import utils.CsvFileWriter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FXController {
@@ -63,36 +51,36 @@ public class FXController {
 
     @FXML private Menu menuQuit;
 
-    public void fillListView(List<Employee> employeeList)
+    private void fillListView(List<Employee> employeeList)
     {
         listViewEmployee.setItems(FXCollections.observableArrayList(employeeList));
     }
 
-    public void setTextTotalHRExpenses(String text) { textTotalHRExpenses.setText(text); }
-    public void setTextTotalEmployee(String text) { textTotalEmployee.setText(text); }
-    public void setTextMostExpDpt(String text) { textMostExpDpt.setText(text); }
-    public void setTextLessExpDpt(String text) { textLessExpDpt.setText(text); }
-    public void setTextAverageDptExp(String text) { textAverageDptExp.setText(text); }
+    private void setTextTotalHRExpenses(String text) { textTotalHRExpenses.setText(text); }
+    private void setTextTotalEmployee(String text) { textTotalEmployee.setText(text); }
+    private void setTextMostExpDpt(String text) { textMostExpDpt.setText(text); }
+    private void setTextLessExpDpt(String text) { textLessExpDpt.setText(text); }
+    private void setTextAverageDptExp(String text) { textAverageDptExp.setText(text); }
 
-    public void setTextAccExpenses(String text) { textAccExpenses.setText(text); }
-    public void setTextAccEmployee(String text) { textAccEmployee.setText(text); }
+    private void setTextAccExpenses(String text) { textAccExpenses.setText(text); }
+    private void setTextAccEmployee(String text) { textAccEmployee.setText(text); }
 
-    public void setTextSalesExpenses(String text) { textSalesExpenses.setText(text); }
-    public void setTextSalesEmployee(String text) { textSalesEmployee.setText(text); }
+    private void setTextSalesExpenses(String text) { textSalesExpenses.setText(text); }
+    private void setTextSalesEmployee(String text) { textSalesEmployee.setText(text); }
 
-    public void setTextMarkExpenses(String text) { textMarkExpenses.setText(text); }
-    public void setTextMarkEmployee(String text) { textMarkEmployee.setText(text); }
+    private void setTextMarkExpenses(String text) { textMarkExpenses.setText(text); }
+    private void setTextMarkEmployee(String text) { textMarkEmployee.setText(text); }
 
-    public void setTextManuExpenses(String text) { textManuExpenses.setText(text); }
-    public void setTextManuEmployee(String text) { textManuEmployee.setText(text); }
+    private void setTextManuExpenses(String text) { textManuExpenses.setText(text); }
+    private void setTextManuEmployee(String text) { textManuEmployee.setText(text); }
 
-    public void setTextEmployeeFirstName(String text) { textEmployeeFirstName.setText(text); }
-    public void setTextEmployeeLastName(String text) { textEmployeeLastName.setText(text); }
-    public void setTextEmployeeDpt(String text) { textEmployeeDpt.setText(text); }
-    public void setTextEmployeePosition(String text) { textEmployeePosition.setText(text); }
-    public void setTextEmployeeSalary(String text) { textEmployeeSalary.setText(text); }
-    public void setTextEmployeeSuperior(String text) { textEmployeeSuperior.setText(text); }
-    public void setTextEmployeeSubordonate(String text) { textEmployeeSubordonate.setText(text); }
+    private void setTextEmployeeFirstName(String text) { textEmployeeFirstName.setText(text); }
+    private void setTextEmployeeLastName(String text) { textEmployeeLastName.setText(text); }
+    private void setTextEmployeeDpt(String text) { textEmployeeDpt.setText(text); }
+    private void setTextEmployeePosition(String text) { textEmployeePosition.setText(text); }
+    private void setTextEmployeeSalary(String text) { textEmployeeSalary.setText(text); }
+    private void setTextEmployeeSuperior(String text) { textEmployeeSuperior.setText(text); }
+    private void setTextEmployeeSubordonate(String text) { textEmployeeSubordonate.setText(text); }
 
     public void stop(ActionEvent actionEvent)
     {
@@ -111,7 +99,7 @@ public class FXController {
         loadListView(company.getAllEmployee());
     }
 
-    public void dialog()
+    private void dialog()
     {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Hire an employee");
@@ -173,7 +161,7 @@ public class FXController {
         dialog.showAndWait();
     }
 
-    public void editDialog()
+    private void editDialog()
     {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Edit an employee");

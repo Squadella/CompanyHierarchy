@@ -29,7 +29,7 @@ public class Employee
         this.depth = 0;
     }
 
-    public Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
+    Employee(String position, String firstName, String sirName, String department, float salary, Employee supervisor, int id)
     {
         this.position = position;
         this.firstName = firstName;
@@ -97,17 +97,17 @@ public class Employee
         subordinate.supervisor = this;
     }
 
-    public void addSubordinate(List<Employee> subordinates)
+    void addSubordinate(List<Employee> subordinates)
     {
         this.subordinates.addAll(subordinates);
     }
 
-    public void removeAllSubordinate()
+    void removeAllSubordinate()
     {
         this.subordinates=new CopyOnWriteArrayList<>();
     }
 
-    public void removeSubordinate(Employee subordinate)
+    void removeSubordinate(Employee subordinate)
     {
         if(subordinates==null)
         {
@@ -136,7 +136,7 @@ public class Employee
         return supervisor;
     }
 
-    public Employee getEmployeeByID(int id, Employee startEmployee)
+    Employee getEmployeeByID(int id, Employee startEmployee)
     {
         List<Employee> nextEmployees = new ArrayList<>();
         nextEmployees.add(startEmployee);
@@ -156,18 +156,18 @@ public class Employee
         return id;
     }
 
-    public int getDepth()
+    int getDepth()
     {
         return depth;
     }
 
-    public void setNoSupervisor()
+    void setNoSupervisor()
     {
         supervisor=null;
         depth=0;
     }
 
-    public void resetInformations( Employee tmp)
+    void resetInformations(Employee tmp)
     {
         this.department=tmp.getDepartment();
         this.firstName=tmp.getFirstName();

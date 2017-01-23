@@ -1,6 +1,5 @@
 package app;
 
-import javafx.application.Platform;
 import utils.CsvFileReader;
 
 import java.util.ArrayList;

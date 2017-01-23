@@ -1,7 +1,6 @@
 package utils;
 
 import app.Employee;
-import app.MainWindow;
 
 import java.io.*;
 import java.net.URL;
@@ -64,7 +63,7 @@ public class CsvFileReader
             List<Employee> employees = new ArrayList<>();
             try
             {
-                String line = "";
+                String line;
                 fileReader = new BufferedReader(new FileReader(csvFile));
 
                 //First pass in the file, loading all the employee into memory.
