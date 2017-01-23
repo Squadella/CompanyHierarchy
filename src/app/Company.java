@@ -50,7 +50,7 @@ public class Company
             }
         }
 
-        employee.resetInformations(newEmployee);
+        employee.resetInformation(newEmployee);
 
         if(supervisor != null)
         {

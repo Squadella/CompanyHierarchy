@@ -167,7 +167,7 @@ public class Employee
         depth=0;
     }
 
-    void resetInformations(Employee tmp)
+    void resetInformation(Employee tmp)
     {
         this.department=tmp.getDepartment();
         this.firstName=tmp.getFirstName();
