@@ -42,12 +42,12 @@ public class Company
             }
         }
         //Anti-loop system.
-        for(int i = 0; i < employee.getSubEmployee().size(); ++i)
+        for(Employee subTest : subordinates)
         {
-            if(employee.getSubEmployee().get(i).getDepth()<=employee.getDepth())
+            if(subTest.getDepth()<employee.getDepth())
             {
                 System.out.println("ERROR");
-                System.exit(-1);
+                return;
             }
         }
 
