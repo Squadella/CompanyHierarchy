@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
+import utils.CsvFileWriter;
 
 import java.util.List;
 import java.util.Objects;
@@ -267,7 +268,7 @@ public class FXController {
             listViewEmployee.getItems().clear();
         company.generateStats();
         loadListView(company.getAllEmployee());
-        //new CsvFileWriter().writeCsvFile(company.getAllEmployee());
+        new CsvFileWriter().writeCsvFile(company.getAllEmployee());
         setTextTotalHRExpenses("Total HR expenses : " + company.getTotalCost() + " $");
         setTextTotalEmployee("Number of employees : " + company.getEmployeeNumber());
         setTextMostExpDpt("Most expensive department : " + company.getMostExpensiveDepartment());
